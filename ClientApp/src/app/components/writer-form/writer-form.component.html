@@ -1,0 +1,16 @@
+
+
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Details</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let w of writers2">
+      <td>{{w.name}}</td>
+      <td>{{w.definition}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn"  (click)="alertWriter()">Alert</button>
