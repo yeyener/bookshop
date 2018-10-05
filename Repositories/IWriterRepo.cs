@@ -9,6 +9,10 @@ namespace bookshop.Repositories
          Task<IEnumerable<Writer>> GetAll();
          
          void Create(Writer writer);
+
+         void Delete(Writer writerId);
+
+         //void Update(Writer writer);
          
     }
 }

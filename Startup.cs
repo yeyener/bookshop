@@ -40,6 +40,8 @@ namespace bookshop
             services.AddScoped<IBookInstResourceClientValidator, BookInstResourceClientValidator>();
 
             services.AddScoped<IBookDefResCliValidator, BookDefResCliValidator>();
+
+            services.AddScoped<IMiscRepo, MiscRepo>();
             
 
             // In production, the Angular files will be served from this directory

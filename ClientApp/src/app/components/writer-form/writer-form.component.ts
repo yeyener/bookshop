@@ -8,14 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WriterFormComponent implements OnInit {
 
-  writers2 :any[] = [];
+  writersList :any = [];
+
+  newWriter : any = {};
 
   constructor(private service : WriterService) { }
 
   ngOnInit() {
-    var a = this.service.getAll().subscribe(w => this.writers2 =<[]> w);
-    
-    //console.log(this.writers);    
+    this.populateWriters();
+  }
+
+  populateWriters(){
+    this.writersList = [];
+    this.service.getAll().subscribe(w => this.writersList = w);
+  }
+
+  updateWriter(ww){
+    var res = this.service.update(ww)
+      .subscribe(x => {this.populateWriters();});
+  }
+
+  createWriter(ww){
+    var res = this.service.create(ww)
+      .subscribe(x => {this.populateWriters();});
+  }
+
+  deleteWriter(writerId, writerName){
+    var conf = confirm("Are you sure you want to delete writer " + writerName + "?");
+    if (conf){
+      var res = this.service.delete(writerId)
+              .subscribe(x => {this.populateWriters();});
+      
+    }
   }
 
   alertWriter(){

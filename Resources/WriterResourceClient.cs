@@ -8,6 +8,6 @@ namespace bookshop.Resources
 
         public string Definition { get; set; }
 
-        public int CountryId{get;set;}
+        public int? CountryId{get;set;}
     }
 }

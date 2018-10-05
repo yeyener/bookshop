@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bookshop.Persistance;
 
 namespace bookshop.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181003034021_Mig_3Table2")]
+    partial class Mig_3Table2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,29 +65,15 @@ namespace bookshop.Migrations
 
                     b.Property<int>("Edition");
 
-                    b.Property<int?>("LanguageId");
-
                     b.Property<int>("NumberInStock");
 
                     b.Property<int>("PageNumber");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<int?>("PublisherId");
-
-                    b.Property<int?>("TranslatorId");
 
                     b.Property<string>("WriterName");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DefinitionId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("PublisherId");
-
-                    b.HasIndex("TranslatorId");
 
                     b.ToTable("BookInsts");
                 });
@@ -203,18 +191,6 @@ namespace bookshop.Migrations
                         .WithMany()
                         .HasForeignKey("DefinitionId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("bookshop.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId");
-
-                    b.HasOne("bookshop.Models.Publisher", "Publisher")
-                        .WithMany()
-                        .HasForeignKey("PublisherId");
-
-                    b.HasOne("bookshop.Models.Translator", "Translator")
-                        .WithMany()
-                        .HasForeignKey("TranslatorId");
                 });
 
             modelBuilder.Entity("bookshop.Models.Writer", b =>

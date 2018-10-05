@@ -20,6 +20,22 @@ namespace bookshop.Models
        public string BookName{get;set;} // Redundant
 
        public string WriterName{get;set;}  // Redundant
+
+       public Publisher Publisher{get;set;}
+
+       public int? PublisherId{get;set;}
+
+       public Translator Translator{get;set;}
+
+       public int? TranslatorId{get;set;}
+
+       public Language Language{get;set;}
+
+       public int? LanguageId { get; set; }
+
+       public decimal Price{get;set;}
+
+
        
     }
 }

@@ -12,5 +12,14 @@ namespace bookshop.Resources
 
        public int Edition { get; set; }
 
+       public decimal Price { get; set; }
+
+       public int? LanguageId { get; set; }
+
+       public int? PublisherId { get; set; }
+
+       public int? TranslatorId { get; set; }
+
+
     }
 }

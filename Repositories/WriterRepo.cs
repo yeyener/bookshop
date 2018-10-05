@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using bookshop.Models;
 using bookshop.Persistance;
@@ -21,10 +22,14 @@ namespace bookshop.Repositories
             return await context.Writers.ToListAsync();
         }
 
-
         public void Create(Writer writer){
             context.Writers.Add(writer);
             context.SaveChanges();
+        }
+        
+        public async void Delete(Writer toDelete){
+            context.Writers.Remove(toDelete);
+            await context.SaveChangesAsync();
         }
     }
 }

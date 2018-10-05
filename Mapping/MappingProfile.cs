@@ -22,11 +22,16 @@ namespace bookshop.Mapping
 
             // client >>> server
 
-            CreateMap<BookInstResourceClient, BookInst>()
-                .ForMember(v =>v.Definition, opt => opt.Ignore());
+            CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Definition, opt => opt.Ignore());
 
-            CreateMap<BookDefResourceClient, BookDef>()
-                .ForMember(v =>v.Writer, opt => opt.Ignore());
+            CreateMap<BookDefResourceClient, BookDef>().ForMember(v =>v.Writer, opt => opt.Ignore());
+
+            CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Language, opt => opt.Ignore())
+                                                          .ForMember(v =>v.Publisher, opt => opt.Ignore())
+                                                          .ForMember(v =>v.Translator, opt => opt.Ignore())
+                                                          .ForMember(v => v.LanguageId, opt => opt.MapFrom(src => src.LanguageId.HasValue ?src.LanguageId : null ))
+                                                          .ForMember(v => v.TranslatorId, opt => opt.MapFrom(src => src.TranslatorId.HasValue ?src.TranslatorId : null ))
+                                                          .ForMember(v => v.PublisherId, opt => opt.MapFrom(src => src.PublisherId.HasValue ?src.PublisherId : null ));
                 
 
             CreateMap<BookInstQueryObjectResource, BookInstQueryObject>();

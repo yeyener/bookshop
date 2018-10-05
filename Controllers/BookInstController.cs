@@ -21,9 +21,11 @@ namespace bookshop.Controllers
         private readonly IMapper mapper;
 
         private readonly IBookInstResourceClientValidator resourceClientValidator;
+        private readonly IBookDefRepo definitionRepo;
 
-        public BookInstController(IBookInstRepo repo, IMapper mapper, IBookInstResourceClientValidator resourceClientValidator)
+        public BookInstController(IBookInstRepo repo, IMapper mapper, IBookInstResourceClientValidator resourceClientValidator, IBookDefRepo definitionRepo)
         {
+            this.definitionRepo = definitionRepo;
             this.resourceClientValidator = resourceClientValidator;
             this.mapper = mapper;
             this.repo = repo;
@@ -75,7 +77,12 @@ namespace bookshop.Controllers
             if (!valResult.Success)
                 return BadRequest(valResult.ErrorMessage);
 
+            // Redundant alanları set edelim tanımlardan
             var bookInst = mapper.Map<BookInstResourceClient, BookInst>(bookInstRes);
+            var defs = await definitionRepo.GetAll();            
+            bookInst.WriterName = defs.FirstOrDefault(a => a.Id == bookInst.DefinitionId).Writer.Name;
+            bookInst.BookName = defs.FirstOrDefault(a => a.Id == bookInst.DefinitionId).Name;
+
             repo.Create(bookInst);
 
             var bookInsts = await this.repo.GetAll();

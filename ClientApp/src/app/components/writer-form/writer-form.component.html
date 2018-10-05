@@ -1,3 +1,13 @@
+<div class="form-group"><label for="writerCreate"></label>
+  <input type="text" [(ngModel)] = "newWriter.name" class="form-control">
+  <input type="text" [(ngModel)] = "newWriter.definition"class="form-control">
+
+  <button class="btn"  (click)="createWriter(newWriter)">Create Writer</button>
+
+  
+
+</div>
+
 
 
 <table class="table">
@@ -6,11 +16,15 @@
     <th>Details</th>
   </thead>
   <tbody>
-    <tr *ngFor="let w of writers2">
-      <td>{{w.name}}</td>
-      <td>{{w.definition}}</td>
+    <tr *ngFor="let w of writersList">
+      <td><input type="text" [(ngModel)] = "w.name" class="form-control" ></td>
+      <td><input type="text" [(ngModel)] = "w.definition" class="form-control"></td>      
+      <td><button class="btn"  (click)="updateWriter(w)">Update Writer</button></td>
+      <td><button class="btn"  (click)="deleteWriter(w.id,w.name)">Delete</button></td>
     </tr>
   </tbody>
 </table>
 
-<button class="btn"  (click)="alertWriter()">Alert</button>
+
+
+

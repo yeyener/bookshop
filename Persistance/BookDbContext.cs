@@ -15,6 +15,12 @@ namespace bookshop.Persistance
 
         public DbSet<Country> Countries {get;set;}
 
+        public DbSet<Language> Languages {get;set;}
+
+        public DbSet<Publisher> Publishers {get;set;}
+
+        public DbSet<Translator> Translators {get;set;}
+
         public BookDbContext(DbContextOptions<Persistance.BookDbContext> options2) : base(options2)
         {
              
@@ -27,6 +33,10 @@ namespace bookshop.Persistance
             .HasOne(pt => pt.BookDef)
             .WithMany(p => p.BookDefGenres)
             .HasForeignKey(pt => pt.BookDefId);
+
+            //  builder.Entity<BookInst>().Property(r => r.Price)
+            // .HasColumnType("decimal(8,2)")
+            // .IsRequired(true);
 
 
         }

@@ -18,5 +18,13 @@ namespace bookshop.Resources
        public string WriterName{get;set;}  // Redundant
 
        public IEnumerable<string> Genres{get;set;} // Redundant
+
+       public decimal Price {get;set;}
+
+       public int LanguageId { get; set; }
+
+       public int PublisherId { get; set; }
+
+       public int TranslatorId { get; set; }
     }
 }
