@@ -26,6 +26,11 @@
                     <a [routerLink]='["/writer-form"]' (click)='collapse()'>
                         <span class='glyphicon glyphicon-education'></span> New Writer
                     </a>
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]='["/bookdef-form"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-education'></span> New Book Definition
+                    </a>
                 </li>                
             </ul>
         </div>

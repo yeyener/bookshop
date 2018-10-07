@@ -20,6 +20,7 @@ export class WriterFormComponent implements OnInit {
 
   populateWriters(){
     this.writersList = [];
+    this.newWriter = {};
     this.service.getAll().subscribe(w => this.writersList = w);
   }
 

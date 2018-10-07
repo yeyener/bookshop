@@ -9,5 +9,9 @@ namespace bookshop.Repositories
         Task<IEnumerable<BookDef>> GetAll();
          
          void Create(BookDef bookDefinition);
+
+         void Add(BookDef bookDef);
+
+         void Remove(BookDef toDelete);
     }
 }

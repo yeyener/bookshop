@@ -1,0 +1,41 @@
+<br/><br/><br/>
+
+<table>
+    <tr>
+        <td>Choose Writer</td>
+        <td>
+                <app-auto-complete-text *ngIf="writersLoaded" [keyValuePairs]="writersAsKvps" (itemSelectedEvent)="onSelectWriter($event)" 
+                 class="input-lg" ></app-auto-complete-text>
+        </td>
+        <td>
+            <button class="input" (click)="goToWriters()" >Create New Writer</button>
+        </td>
+    </tr>    
+</table>
+
+
+
+<table class="table" *ngIf="writersBookDefsLoaded">
+    <thead>
+        <th>Writer Name</th>
+        <th>Book Name</th>
+        <th>Date Written</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tr *ngFor="let bookDef of writersBookDefs" >
+        <td>{{bookDef.writerName}}</td>
+        <td><input type="text" class="input-sm" [(ngModel)]="bookDef.name" /></td>
+        <td><input type="text" class="input-sm" [(ngModel)]="bookDef.yearWritten" /> </td>
+        <th><button class="input" (click)="updateBookDef(bookDef)" >Update</button></th>
+        <th><button class="input" (click)="deleteBookDef(bookDef)" >Delete</button></th>
+    </tr>
+    <tr>
+        <td>{{selectedWriterTxt}}</td>
+        <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.name" /></td>
+        <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.yearWritten"  ></td>
+        <td><button class="input" (click)="createBookDef(newBookDef)" >Create</button></td>
+    </tr>    
+</table>
+
+

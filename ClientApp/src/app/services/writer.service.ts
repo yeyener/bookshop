@@ -13,6 +13,14 @@ export class WriterService {
     return this.http.get(this.apiEndPoint + "getAll");
   }
 
+  getAllNames(){
+    return this.http.get(this.apiEndPoint + "getAllNames");
+  }
+
+  getAllNamesAndIds(){
+    return this.http.get(this.apiEndPoint + "getAllNamesAndIds");
+  }
+
   delete(id){
     return this.http.delete(this.apiEndPoint + id);
   }

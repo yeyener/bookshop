@@ -27,5 +27,13 @@ namespace bookshop.Repositories
             context.BookDefinitons.Add(bookDef);
             context.SaveChanges();
         }
+
+        public void Remove(BookDef bookDef){
+            context.Remove(bookDef);
+        }
+
+        public void Add(BookDef bookDef){
+            context.Add(bookDef);
+        }
     }
 }

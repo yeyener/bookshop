@@ -31,6 +31,8 @@ namespace bookshop
 
             services.AddAutoMapper();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IBookInstRepo, BookInstRepo>();
 
             services.AddScoped<IWriterRepo, WriterRepo>();

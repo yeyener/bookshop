@@ -11,6 +11,7 @@ namespace bookshop.Persistance
 
         public DbSet<Writer> Writers{get;set;}       
 
+
         public DbSet<Genre> Genres {get;set;}
 
         public DbSet<Country> Countries {get;set;}
