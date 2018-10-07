@@ -1,0 +1,9 @@
+table.test td {
+    margin: 12px 12px 12px 12px; 
+    padding: 8px 8px 8px 8px;
+}
+table.test {
+    border-collapse: separate;
+    border-spacing: 1px;
+    *border-collapse: expression('separate', cellSpacing = '1px');
+}

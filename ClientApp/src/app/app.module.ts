@@ -15,6 +15,9 @@ import { WriterService } from './services/writer.service';
 import { BookdefFormComponent } from './components/bookdef-form/bookdef-form.component';
 import { AutoCompleteTextComponent } from './components/auto-complete-text/auto-complete-text.component';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { BookInstComponent } from './components/book-inst/book-inst.component';
+import { BookInstService } from './services/book-inst.service';
+import { MiscService } from './services/misc.service';
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { Ng2CompleterModule } from 'ng2-completer';
     FetchDataComponent,
     WriterFormComponent,
     BookdefFormComponent,
-    AutoCompleteTextComponent
+    AutoCompleteTextComponent,
+    BookInstComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,9 +43,10 @@ import { Ng2CompleterModule } from 'ng2-completer';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'writer-form', component: WriterFormComponent },
       { path: 'bookdef-form', component: BookdefFormComponent },
+      { path: 'bookinst-form', component: BookInstComponent },
     ])
   ],
-  providers: [WriterService, BookdefService],
+  providers: [WriterService, BookdefService, BookInstService,MiscService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

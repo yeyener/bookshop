@@ -6,7 +6,7 @@ import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-auto-complete-text',
-  template : `<ng2-completer [(ngModel)]="searchStr" (change)="itemIsSelected()" [datasource]="valuesList" [minSearchLength]="1" >
+  template : `<ng2-completer [(ngModel)]="searchStr" (change)="itemIsSelected()" [datasource]="valuesList" [minSearchLength]="0" >
   </ng2-completer>`,
 
   styleUrls: ['./auto-complete-text.component.css']

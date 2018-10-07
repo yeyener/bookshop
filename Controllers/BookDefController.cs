@@ -41,6 +41,19 @@ namespace bookshop.Controllers
             var retVal = Mapper.Map<IEnumerable<BookDef>, IEnumerable<BookDefResource>>(bookDefs);
             return retVal;
         }
+        [HttpGet("getWritersBookDefsAsKvps")]
+        public async Task<IActionResult> GetBooksByWriterAsKvps(int writerId)
+        {
+            var bookDefs = await this.repo.GetAll();
+            bookDefs = bookDefs.Where(bd => bd.WriterId == writerId);
+            
+            IDictionary<int,string> kvps = new Dictionary<int, string>();
+            foreach (var bookDef in bookDefs)
+                kvps.Add(bookDef.Id, bookDef.Name);
+
+            return Ok(kvps);
+        }
+        
 
 
         [HttpPost("create")]

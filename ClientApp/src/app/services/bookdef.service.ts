@@ -11,6 +11,10 @@ export class BookdefService {
     return this.http.get(this.apiEndPoint + "getWritersBookDefs?writerId=" + writerId);
   }
 
+  getWritersBookDefsAsKvps(writerId){
+    return this.http.get(this.apiEndPoint + "getWritersBookDefsAsKvps?writerId=" + writerId);
+  }
+
   updateBookDef(bookDef){
     return this.http.put(this.apiEndPoint + bookDef.id , bookDef);
   }
