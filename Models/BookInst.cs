@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bookshop.Models
@@ -34,6 +35,8 @@ namespace bookshop.Models
        public int? LanguageId { get; set; }
 
        public decimal Price{get;set;}
+
+       public ICollection<BookInstPhoto> Photos;
 
 
        

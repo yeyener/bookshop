@@ -1,0 +1,52 @@
+import { CommunicatorService } from './../../services/communicator.service';
+import { BookInstance } from './../../pocos/bookInstance';
+import { BookInstService } from './../../services/book-inst.service';
+import { WriterService } from './../../services/writer.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-book-list',
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.css']
+})
+export class BookListComponent implements OnInit {
+
+  private writersAsKvps: any;
+  writersLoaded: Promise<boolean>;
+  bookListLoaded: Promise<boolean>;
+  selectedWriterId: any;
+  bookInstanceList: [BookInstance];
+
+  constructor(private writerService: WriterService, private bookInstService: BookInstService, private router: Router,
+    private communicator: CommunicatorService) { }
+
+  ngOnInit() {
+    this.writerService.getAllNamesAndIds().subscribe(a => {
+      this.writersAsKvps = a;
+      this.writersLoaded = Promise.resolve(true);
+    });
+  }
+
+  onSelectWriter(selectedWriter: any) {
+    this.selectedWriterId = selectedWriter.key;
+    const q = this.createQueryObject();
+    this.bookInstService.getByCustom(q).subscribe(a => {
+      this.bookInstanceList = <[BookInstance]>a;
+      this.bookListLoaded = Promise.resolve(true);
+      console.log(this.bookInstanceList);
+    });
+  }
+
+  updateBookInst(bi: BookInstance ) {
+    this.communicator.push(bi);
+    this.router.navigate(['/bookinst-form/', {ref : 'list'}]);
+  }
+
+
+  private createQueryObject() {
+    const qo: any = {};
+    qo.writerId = this.selectedWriterId;
+    return qo;
+  }
+}

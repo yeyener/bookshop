@@ -21,9 +21,9 @@ namespace bookshop.Resources
 
        public decimal Price {get;set;}
 
-       public int LanguageId { get; set; }
+       public string LanguageName { get; set; }
 
-       public int PublisherId { get; set; }
+       public string PublisherName { get; set; }
 
        public int TranslatorId { get; set; }
     }

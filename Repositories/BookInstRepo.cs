@@ -70,10 +70,11 @@ namespace bookshop.Repositories
             if (!string.IsNullOrWhiteSpace(queryObject.WriterNameLike))
                 queryableSet = queryableSet.Where(a => a.Definition.Writer.Name.Contains(queryObject.WriterNameLike));
 
-            if (!string.IsNullOrWhiteSpace(queryObject.GenreNameLike)){
+            if (!string.IsNullOrWhiteSpace(queryObject.GenreNameLike))
                 queryableSet = queryableSet.Where(q => q.Definition.BookDefGenres.Any(gg => gg.Genre.Name.Contains(queryObject.GenreNameLike)));
-            }
-                                
+            
+            if (queryObject.WriterId > 0 )
+                queryableSet = queryableSet.Where(a => a.Definition.Writer.Id == queryObject.WriterId);                                            
         
         return queryableSet;
         }

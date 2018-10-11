@@ -10,19 +10,19 @@ import { Router } from '@angular/router';
 })
 export class BookdefFormComponent implements OnInit {
 
-  writersAsKvps : any = [];
+  writersAsKvps: any = [];
 
   writersLoaded: Promise<boolean>;
-  writersBookDefsLoaded : Promise<boolean>;
+  writersBookDefsLoaded: Promise<boolean>;
 
-  writersBookDefs : any = [];
+  writersBookDefs: any = [];
 
-  newBookDef : any ={};
+  newBookDef: any = {};
   selectedWriterTxt: string;
 
-  selectedWriterId : any;
+  selectedWriterId: any;
 
-  constructor(private writerService : WriterService, private bookDefService : BookdefService, private router : Router) {
+  constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router) {
    }
 
   ngOnInit() {
@@ -31,37 +31,37 @@ export class BookdefFormComponent implements OnInit {
         });
   }
 
-    onSelectWriter(selectedWriter : any){
+    onSelectWriter(selectedWriter: any) {
       this.selectedWriterId = selectedWriter.key;
       this.selectedWriterTxt = selectedWriter.value;
       this.newBookDef.writerId = this.selectedWriterId;
       this.populateBookDefs(this.selectedWriterId);
 
     }
-  
-    goToWriters(){
+
+    goToWriters() {
       this.router.navigate(['/writer-form']);
     }
 
-    updateBookDef(bookDef){
+    updateBookDef(bookDef) {
         this.bookDefService.updateBookDef(bookDef).subscribe(a => {this.populateBookDefs(this.selectedWriterId); });
     }
 
-    deleteBookDef(bookDef){
+    deleteBookDef(bookDef) {
       this.bookDefService.deleteBookDef(bookDef).subscribe(a => this.populateBookDefs(this.selectedWriterId),
       err => alert(err.message)
       );
     }
 
-    createBookDef(bookDef){
+    createBookDef(bookDef) {
       this.bookDefService.createBookDef(bookDef).subscribe(a => this.populateBookDefs(this.selectedWriterId));
     }
 
-    populateBookDefs(selectedWriterKey){
+    populateBookDefs(selectedWriterKey) {
       this.bookDefService.getWritersBookDefs(selectedWriterKey).subscribe(a => {
         this.writersBookDefs = a;
         this.writersBookDefsLoaded = Promise.resolve(true);
-        this.newBookDef = {writerId : this.selectedWriterId }
+        this.newBookDef = {writerId : this.selectedWriterId };
       });
     }
 

@@ -1,0 +1,36 @@
+<table class="test">
+    <tr>
+        <td>Select Writer</td>
+        <td>
+                <app-auto-complete-text *ngIf="writersLoaded"  [keyValuePairs]="writersAsKvps" (itemSelectedEvent)="onSelectWriter($event)" 
+                 class="input-lg" [(searchKey)]="selectedWriterId" ></app-auto-complete-text>
+        </td>
+    </tr>
+</table>
+
+<br><br><br>
+
+
+<table *ngIf="bookListLoaded" class="table">
+  <thead>
+    <th>Writer</th>
+    <th>Book Def</th>
+    <th>Publisher</th>
+    <th>Edition</th>
+    <th>Language</th>
+    <th>Price</th>
+    <th>Number In Stock</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let bookInst of bookInstanceList" >
+          <td>{{bookInst.writerName}}</td>
+          <td>{{bookInst.bookName}}</td>
+          <td>{{bookInst.price}}</td>
+          <td>{{bookInst.numberInStock}}</td>
+          <td>{{bookInst.publisherName}}</td>
+          <td>{{bookInst.languageName}}</td>          
+          <th><button class="input" (click)="updateBookInst(bookInst)" >Update</button></th>
+          <th><button class="input" (click)="deleteBookInst(bookInst)" >Delete</button></th>
+      </tr>
+  </tbody>
+</table>

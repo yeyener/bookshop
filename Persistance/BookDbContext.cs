@@ -22,6 +22,8 @@ namespace bookshop.Persistance
 
         public DbSet<Translator> Translators {get;set;}
 
+        public DbSet<BookInstPhoto> Photos {get;set;}
+
         public BookDbContext(DbContextOptions<Persistance.BookDbContext> options2) : base(options2)
         {
              

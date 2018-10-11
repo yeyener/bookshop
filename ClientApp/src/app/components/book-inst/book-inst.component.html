@@ -5,14 +5,14 @@
         <td>Writer</td>
         <td>
                 <app-auto-complete-text *ngIf="writersLoaded"  [keyValuePairs]="writersAsKvps" (itemSelectedEvent)="onSelectWriter($event)" 
-                 class="input-lg" ></app-auto-complete-text>
+                 class="input-lg" [(searchKey)]="newBookInstance.writerId" ></app-auto-complete-text>
         </td>
-    </tr>    
+    </tr>
     <tr>
         <td>Book Definition</td>
         <td>
                 <app-auto-complete-text *ngIf="bookDefsLoaded"  [keyValuePairs]="bookDefsAsKvps" (itemSelectedEvent)="onSelectBookDef($event)" 
-                 class="input-lg" ></app-auto-complete-text>
+                 class="input-lg" [(searchKey)]="newBookInstance.definitionId" ></app-auto-complete-text>
         </td>        
     </tr>
 
@@ -20,7 +20,7 @@
         <td>Publisher</td>
         <td>
                 <app-auto-complete-text *ngIf="publishersLoaded"  [keyValuePairs]="publishersAsKvps"  
-                 class="input-lg" ></app-auto-complete-text>
+                 class="input-lg" [(searchKey)]="newBookInstance.publisherId" ></app-auto-complete-text>
         </td>        
     </tr>
 
@@ -28,15 +28,31 @@
         <td>Language</td>
         <td>
                 <app-auto-complete-text *ngIf="languagesLoaded"  [keyValuePairs]="languagesAsKvps" 
-                 class="input-lg" ></app-auto-complete-text>
+                 class="input-lg" [(searchKey)]="newBookInstance.languageId" ></app-auto-complete-text>
         </td>        
     </tr>    
     <tr>
         <td>Translator (Optional)</td>
         <td>
                 <app-auto-complete-text *ngIf="translatorsLoaded"  [keyValuePairs]="translatorsAsKvps" 
-                 class="input-lg" ></app-auto-complete-text>
+                 class="input-lg" [(searchKey)]="newBookInstance.translatorId"></app-auto-complete-text>
         </td>        
+    </tr>
+
+    <tr>
+        <td>Price</td>
+            <td>
+                <input currencyMask type="text" [options]="{prefix: '', suffix:'TL'}"  [(ngModel)]="newBookInstance.price" />
+            </td>        
+        </tr>    
+
+    <tr>
+        <td>
+            Create Book
+        </td>
+        <td>
+            <button class="btn btn-primary" (click)="createBookInstance()" > Create Book Instance </button>
+        </td>
     </tr>
 
 

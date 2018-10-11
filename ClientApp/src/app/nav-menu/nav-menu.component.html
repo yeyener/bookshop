@@ -31,7 +31,12 @@
                         <a [routerLink]='["/bookinst-form"]' (click)='collapse()'>
                             <span class='glyphicon glyphicon-education'></span> New Book Instance
                         </a>
-                    </li>
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                        <a [routerLink]='["/booklist-form"]' (click)='collapse()'>
+                            <span class='glyphicon glyphicon-education'></span> Book Instances List
+                        </a>
+                </li>                
             </ul>
         </div>
     </div>

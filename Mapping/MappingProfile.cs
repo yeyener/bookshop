@@ -14,9 +14,12 @@ namespace bookshop.Mapping
         public MappingProfile()
         {
             //  server >>> client
+            CreateMap<BookInstPhoto,PhotoResource>();
             CreateMap<BookInst, BookInstResource>()
-                            .ForMember(bires => bires.Genres, 
-                            act => act.MapFrom( bi => bi.Definition.BookDefGenres.Select(bdg => bdg.Genre.Name)));
+                            .ForMember(bires => bires.Genres, act => act.MapFrom( bi => bi.Definition.BookDefGenres.Select(bdg => bdg.Genre.Name)))
+                            .ForMember(bires => bires.LanguageName, act => act.MapFrom( bi => bi.Language.Name))
+                            .ForMember(bires => bires.PublisherName, act => act.MapFrom( bi => bi.Publisher.Name)
+                            );
 
 
             CreateMap<BookDef, BookDefResource>()
