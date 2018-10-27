@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bookshop.Models
@@ -36,7 +37,7 @@ namespace bookshop.Models
 
        public decimal Price{get;set;}
 
-       public ICollection<BookInstPhoto> Photos;
+       public ICollection<BookInstPhoto> Photos = new Collection<BookInstPhoto>();
 
 
        

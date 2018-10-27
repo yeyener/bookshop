@@ -17,5 +17,7 @@ namespace bookshop.Repositories
 
           Task<IEnumerable<BookInst>> GetAllByCustom(BookInstQueryObject queryObject);
           void Create(BookInst bookInst);
+
+          void Delete(BookInst bookInst);
     }
 }

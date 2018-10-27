@@ -6,8 +6,8 @@ namespace bookshop.Repositories
 {
     public interface IPhotoRepo
     {
-        Task<IEnumerable<BookInstPhoto>> GetPhotos(int vehicleId);
+        Task<IEnumerable<BookInstPhoto>> GetPhotosAsync(int bookInstId);
 
-         void Add(BookInstPhoto photo);
+        void Add(BookInstPhoto photo);
     }
 }

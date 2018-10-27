@@ -6,6 +6,7 @@ using bookshop.Models;
 using bookshop.Persistance;
 using bookshop.Repositories;
 using bookshop.Resources;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bookshop.Controllers

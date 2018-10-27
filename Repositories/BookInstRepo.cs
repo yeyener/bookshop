@@ -54,7 +54,10 @@ namespace bookshop.Repositories
                 .ThenInclude(bd => bd.Writer)
              .Include(bi => bi.Definition)
                  .ThenInclude(bd => bd.BookDefGenres).ThenInclude(g => g.Genre)
-            .AsQueryable();
+             .Include(bi => bi.Language)
+             .Include(bi => bi.Translator)
+             .Include(bi => bi.Publisher)
+             .AsQueryable();
 
             booksQuery = filterQuery(booksQuery, queryObject);
 
@@ -64,6 +67,10 @@ namespace bookshop.Repositories
         public void Create(BookInst bookInst){
             context.BookInstances.Add(bookInst);
             context.SaveChanges();
+        }
+
+        public void Delete(BookInst bookInst){
+            context.BookInstances.Remove(bookInst);
         }
 
         private IQueryable<BookInst> filterQuery(IQueryable<BookInst> queryableSet, BookInstQueryObject queryObject){

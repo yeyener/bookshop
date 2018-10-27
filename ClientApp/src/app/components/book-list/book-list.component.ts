@@ -1,3 +1,4 @@
+import { BookErrorHandler } from './../../handlers/bookErrorHandler';
 import { CommunicatorService } from './../../services/communicator.service';
 import { BookInstance } from './../../pocos/bookInstance';
 import { BookInstService } from './../../services/book-inst.service';
@@ -19,7 +20,7 @@ export class BookListComponent implements OnInit {
   bookInstanceList: [BookInstance];
 
   constructor(private writerService: WriterService, private bookInstService: BookInstService, private router: Router,
-    private communicator: CommunicatorService) { }
+    private communicator: CommunicatorService, private errHandler: BookErrorHandler) { }
 
   ngOnInit() {
     this.writerService.getAllNamesAndIds().subscribe(a => {
@@ -30,17 +31,27 @@ export class BookListComponent implements OnInit {
 
   onSelectWriter(selectedWriter: any) {
     this.selectedWriterId = selectedWriter.key;
+    this.populateList();
+  }
+
+  private populateList(){
     const q = this.createQueryObject();
     this.bookInstService.getByCustom(q).subscribe(a => {
       this.bookInstanceList = <[BookInstance]>a;
       this.bookListLoaded = Promise.resolve(true);
-      console.log(this.bookInstanceList);
     });
   }
 
   updateBookInst(bi: BookInstance ) {
     this.communicator.push(bi);
     this.router.navigate(['/bookinst-form/', {ref : 'list'}]);
+  }
+
+  deleteBookInst(bi: BookInstance) {
+    this.bookInstService.delete(bi.id).subscribe(a => {
+      alert('Book instance deleted');
+      this.populateList();
+    }, err => {this.errHandler.handleError(err); } );
   }
 
 

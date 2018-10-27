@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ErrorHandler, enableProdMode } from '@angular/core';
+import { BookErrorHandler } from './handlers/bookErrorHandler';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -21,6 +23,8 @@ import { BookInstComponent } from './components/book-inst/book-inst.component';
 import { BookInstService } from './services/book-inst.service';
 import { MiscService } from './services/misc.service';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { PhotoService } from './services/photo.service';
+import { FrontPageComponent } from './components/front-page/front-page.component';
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import { BookListComponent } from './components/book-list/book-list.component';
     BookdefFormComponent,
     AutoCompleteTextComponent,
     BookInstComponent,
-    BookListComponent
+    BookListComponent,
+    FrontPageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,9 +55,12 @@ import { BookListComponent } from './components/book-list/book-list.component';
       { path: 'bookdef-form', component: BookdefFormComponent },
       { path: 'bookinst-form', component: BookInstComponent },
       { path: 'booklist-form', component: BookListComponent },
+      { path: 'frontPage', component: FrontPageComponent },
     ])
   ],
-  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService],
+  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService
+  // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

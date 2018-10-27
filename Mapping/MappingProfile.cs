@@ -18,24 +18,27 @@ namespace bookshop.Mapping
             CreateMap<BookInst, BookInstResource>()
                             .ForMember(bires => bires.Genres, act => act.MapFrom( bi => bi.Definition.BookDefGenres.Select(bdg => bdg.Genre.Name)))
                             .ForMember(bires => bires.LanguageName, act => act.MapFrom( bi => bi.Language.Name))
-                            .ForMember(bires => bires.PublisherName, act => act.MapFrom( bi => bi.Publisher.Name)
-                            );
+                            .ForMember(bires => bires.PublisherName, act => act.MapFrom( bi => bi.Publisher.Name))
+                            .ForMember(res => res.DefinitionId, o => o.MapFrom(model => model.Definition.Id) )
+                            ;
 
 
             CreateMap<BookDef, BookDefResource>()
                 .ForMember(res => res.WriterName, o => o.MapFrom(model => model.Writer.Name));
 
             // client >>> server
-            CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Definition, opt => opt.Ignore());
+            //CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Definition, opt => opt.Ignore());
 
             CreateMap<BookDefResourceClient, BookDef>().ForMember(v =>v.Writer, opt => opt.Ignore());
 
-            CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Language, opt => opt.Ignore())
-                                                          .ForMember(v =>v.Publisher, opt => opt.Ignore())
-                                                          .ForMember(v =>v.Translator, opt => opt.Ignore())
-                                                          .ForMember(v => v.LanguageId, opt => opt.MapFrom(src => src.LanguageId.HasValue ?src.LanguageId : null ))
-                                                          .ForMember(v => v.TranslatorId, opt => opt.MapFrom(src => src.TranslatorId.HasValue ?src.TranslatorId : null ))
-                                                          .ForMember(v => v.PublisherId, opt => opt.MapFrom(src => src.PublisherId.HasValue ?src.PublisherId : null ));
+            CreateMap<BookInstResource, BookInst>().ForMember(v =>v.Definition, opt => opt.Ignore())            
+                                .ForMember(v =>v.Id, opt => opt.Condition(source => source.Id > 0 )) //// ID sıfırdan büyükse map ediyoruz. Editte map etsin insert'te etmesin. (Vt'de Identity insert off)
+                                .ForMember(v =>v.Language, opt => opt.Ignore())
+                                .ForMember(v =>v.Publisher, opt => opt.Ignore())
+                                .ForMember(v =>v.Translator, opt => opt.Ignore())
+                                .ForMember(v => v.LanguageId, opt => opt.MapFrom(src => src.LanguageId.HasValue ?src.LanguageId : null ))
+                                .ForMember(v => v.TranslatorId, opt => opt.MapFrom(src => src.TranslatorId.HasValue ?src.TranslatorId : null ))
+                                .ForMember(v => v.PublisherId, opt => opt.MapFrom(src => src.PublisherId.HasValue ?src.PublisherId : null ));
                 
 
             CreateMap<BookInstQueryObjectResource, BookInstQueryObject>();

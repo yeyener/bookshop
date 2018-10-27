@@ -7,6 +7,6 @@ namespace bookshop.Validators
 {
     public interface IBookInstResourceClientValidator
     {
-          Task<Result> IsValidAsync(BookInstResourceClient res);
+          Task<Result> IsValidAsync(BookInstResource res);
     }
 }

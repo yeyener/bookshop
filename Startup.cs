@@ -1,7 +1,10 @@
+using System.Text;
 using AutoMapper;
+using bookshop.Models;
 using bookshop.Persistance;
 using bookshop.Repositories;
 using bookshop.Validators;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace bookshop
@@ -29,6 +33,8 @@ namespace bookshop
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                              .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore); 
 
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+
             services.AddAutoMapper();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -44,6 +50,8 @@ namespace bookshop
             services.AddScoped<IBookDefResCliValidator, BookDefResCliValidator>();
 
             services.AddScoped<IMiscRepo, MiscRepo>();
+
+            services.AddScoped<IPhotoRepo, PhotoRepo>();
             
 
             // In production, the Angular files will be served from this directory
@@ -53,6 +61,20 @@ namespace bookshop
             });
 
             services.AddDbContext<BookDbContext>( a => a.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>{
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+
+                            ValidIssuer = "http://localhost:5001",
+                            ValidAudience = "http://localhost:5001",
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                        };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +89,8 @@ namespace bookshop
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

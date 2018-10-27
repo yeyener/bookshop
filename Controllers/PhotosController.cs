@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 namespace bookshop.Controllers
 {
     // 
-    [Route("/api/vehicles/{vehicleId}/photos")]
+    [Route("/api/bookInstPhotos/{bookInstId}/")]
     public class PhotosController : Controller
     {
 
@@ -35,15 +35,14 @@ namespace bookshop.Controllers
             this.host = host;
         }
 
-        public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+        [HttpGet]
+        public async Task<IEnumerable<PhotoResource>> GetPhotos(int bookInstId)
         {
-            var photos = await this.photoRepo.GetPhotos(vehicleId);
-            return Mapper.Map<IEnumerable<BookInstPhoto>,IEnumerable<PhotoResource>>(photos);
+            var photos = await this.photoRepo.GetPhotosAsync(bookInstId);
+            var retVal = photos.Where( a => a.BookInstId == bookInstId);
+            return Mapper.Map<IEnumerable<BookInstPhoto>,IEnumerable<PhotoResource>>(retVal );
         }
 
-        private void asasd(){
-
-        }
 
         [HttpPost]
         public async Task<IActionResult> Upload(int bookInstId, IFormFile file)
@@ -87,6 +86,9 @@ namespace bookshop.Controllers
 
         public class PhotoResource
         {
+            public string FileName{get;set;}
+
+            public int BookInstId{get;set;}
         }
     }
 }

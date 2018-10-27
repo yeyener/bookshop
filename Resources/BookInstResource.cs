@@ -6,6 +6,8 @@ namespace bookshop.Resources
     public class BookInstResource
     {
        public int Id{get;set;} 
+
+       public int DefinitionId{get;set;} 
        
        public int NumberInStock{get;set;}
 
@@ -23,8 +25,17 @@ namespace bookshop.Resources
 
        public string LanguageName { get; set; }
 
+       public int? LanguageId { get; set; }
+
        public string PublisherName { get; set; }
 
-       public int TranslatorId { get; set; }
+       public int? PublisherId { get; set; }
+
+       public int? TranslatorId { get; set; }
+
+       public string TranslatorName { get; set; }
+
+       public string PhotoPath {get;set;}
+      
     }
 }

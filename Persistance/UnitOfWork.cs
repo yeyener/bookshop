@@ -14,5 +14,9 @@ namespace bookshop.Persistance
         {
             await this.context.SaveChangesAsync();
         }
+
+        public void Complete(){
+            this.context.SaveChanges();
+        }
     }
 }

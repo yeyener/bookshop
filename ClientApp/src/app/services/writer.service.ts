@@ -5,32 +5,32 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class WriterService {
 
-  private readonly apiEndPoint = "api/writers/"
+  private readonly apiEndPoint = 'api/writers/';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getAll(){
-    return this.http.get(this.apiEndPoint + "getAll");
+  getAll() {
+    return this.http.get(this.apiEndPoint + 'getAll');
   }
 
-  getAllNames(){
-    return this.http.get(this.apiEndPoint + "getAllNames");
+  getAllNames() {
+    return this.http.get(this.apiEndPoint + 'getAllNames');
   }
 
-  getAllNamesAndIds(){
-    return this.http.get(this.apiEndPoint + "getAllNamesAndIds");
+  getAllNamesAndIds() {
+    return this.http.get(this.apiEndPoint + 'getAllNamesAndIds');
   }
 
-  delete(id){
+  delete(id) {
     return this.http.delete(this.apiEndPoint + id);
   }
 
-  update(writer){
+  update(writer) {
     return this.http.put(this.apiEndPoint + writer.id , writer);
   }
 
-  create(writer){
-    return this.http.post(this.apiEndPoint + "create" ,writer);
+  create(writer) {
+    return this.http.post(this.apiEndPoint + 'create' , writer);
   }
 
 }

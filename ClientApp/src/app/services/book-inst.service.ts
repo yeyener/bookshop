@@ -11,6 +11,14 @@ export class BookInstService {
     return this.http.post(this.endPointUrl + 'create' , bookInstance);
   }
 
+  edit(bookInstance) {
+    return this.http.post(this.endPointUrl + 'edit' , bookInstance);
+  }
+
+  delete(biId) {
+    return this.http.delete(this.endPointUrl + biId);
+  }
+
   getByCustom(queryObject) {
      return this.http.get(this.endPointUrl + 'getByCustom?' + this.toQueryString(queryObject));
   }

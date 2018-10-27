@@ -14,7 +14,7 @@
 <table *ngIf="bookListLoaded" class="table">
   <thead>
     <th>Writer</th>
-    <th>Book Def</th>
+    <th>Book Name</th>
     <th>Publisher</th>
     <th>Edition</th>
     <th>Language</th>
@@ -25,10 +25,11 @@
       <tr *ngFor="let bookInst of bookInstanceList" >
           <td>{{bookInst.writerName}}</td>
           <td>{{bookInst.bookName}}</td>
+          <td>{{bookInst.publisherName}}</td>
+          <td>{{bookInst.edition}}</td>
+          <td>{{bookInst.languageName}}</td>
           <td>{{bookInst.price}}</td>
           <td>{{bookInst.numberInStock}}</td>
-          <td>{{bookInst.publisherName}}</td>
-          <td>{{bookInst.languageName}}</td>          
           <th><button class="input" (click)="updateBookInst(bookInst)" >Update</button></th>
           <th><button class="input" (click)="deleteBookInst(bookInst)" >Delete</button></th>
       </tr>

@@ -5,5 +5,7 @@ namespace bookshop.Persistance
     public interface IUnitOfWork
     {
          Task CompleteAsync();
+
+         void Complete();
     }
 }
