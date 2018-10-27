@@ -45,6 +45,8 @@ namespace bookshop.Mapping
             CreateMap<BookInstQueryObjectResource, BookInstQueryObject>();
 
             CreateMap<WriterResourceClient, Writer>();
+
+            CreateMap<UserResource, User>().ForMember(u => u.Password, opt => opt.Ignore()) ;
                 
         }
     }

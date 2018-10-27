@@ -15,8 +15,8 @@ namespace bookshop.Repositories
         public WriterRepo(BookDbContext context)
         {
             this.context = context;
-
         }
+        
         public async Task<IEnumerable<Writer>> GetAll()
         {
             return await context.Writers.ToListAsync();

@@ -20,9 +20,7 @@ export class SignupComponent implements OnInit {
   signup() {
     this.authService.signup(this.user).subscribe(
       res => {
-         const t = (<any>res).token ;
-         localStorage.setItem('jwt', t);
-         console.log(t);
+        alert(res);
       } ,
       err => this.errHandler.handleError(err));
   }

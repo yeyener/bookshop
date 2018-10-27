@@ -10,11 +10,10 @@
   <div class="form-group"><label for="userName"></label><input id="userName" [(ngModel)]="user.name" name="userName" type="text" class="form-control"></div>
   <div class="form-group"><label for="userPassword"></label><input id="userPassword" [(ngModel)]="user.password" name="userPassword"  type="password" class="form-control password "></div>
   
-  <button class="btn btn-primary" (click)="login()" >Login</button>
+  <button type="button" class="btn btn-primary" (click)="login()" >Login</button>
  
 
 </form>
 
-
-<a href="/signup" > Sign Up </a> 
+<a (click)="navitageToSignUp()" > Sign Up </a> 
 

@@ -1,5 +1,6 @@
 using System.Text;
 using AutoMapper;
+using bookshop.Core;
 using bookshop.Models;
 using bookshop.Persistance;
 using bookshop.Repositories;
@@ -52,8 +53,13 @@ namespace bookshop
             services.AddScoped<IMiscRepo, MiscRepo>();
 
             services.AddScoped<IPhotoRepo, PhotoRepo>();
-            
 
+            services.AddScoped<IUserRepo, UserRepo>();
+
+            services.AddScoped<ISignupValidator, SignupValidator>();
+
+            services.AddScoped<ITokenGenetator, TokenGenerator>();
+            
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

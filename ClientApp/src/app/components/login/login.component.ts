@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { MiscService } from './../../services/misc.service';
 import { Component, OnInit, ErrorHandler } from '@angular/core';
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   user: any = {};
 
-  constructor(private authService: AuthService, private errHandler: BookErrorHandler) { }
+  constructor(private authService: AuthService, private errHandler: BookErrorHandler, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +27,10 @@ export class LoginComponent implements OnInit {
          console.log(t);
       } ,
       err => this.errHandler.handleError(err));
+  }
+
+  navitageToSignUp() {
+    this.router.navigate(['/signup']);
   }
 
 }
