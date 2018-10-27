@@ -11,7 +11,6 @@ namespace bookshop.Persistance
 
         public DbSet<Writer> Writers{get;set;}       
 
-
         public DbSet<Genre> Genres {get;set;}
 
         public DbSet<Country> Countries {get;set;}
@@ -23,6 +22,8 @@ namespace bookshop.Persistance
         public DbSet<Translator> Translators {get;set;}
 
         public DbSet<BookInstPhoto> Photos {get;set;}
+
+        public DbSet<User> Users{get;set;}
 
         public BookDbContext(DbContextOptions<Persistance.BookDbContext> options2) : base(options2)
         {

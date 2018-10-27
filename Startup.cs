@@ -90,7 +90,7 @@ namespace bookshop
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

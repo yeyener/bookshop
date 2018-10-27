@@ -33,7 +33,7 @@ namespace bookshop.Controllers
 
 
 
-        [HttpGet("getAll")]
+        [HttpGet("getAll"), Authorize]
         public async Task<IActionResult> GetAll()
         {
             var writers = await this.repo.GetAll();

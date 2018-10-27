@@ -20,6 +20,7 @@ namespace bookshop.Mapping
                             .ForMember(bires => bires.LanguageName, act => act.MapFrom( bi => bi.Language.Name))
                             .ForMember(bires => bires.PublisherName, act => act.MapFrom( bi => bi.Publisher.Name))
                             .ForMember(res => res.DefinitionId, o => o.MapFrom(model => model.Definition.Id) )
+                            .ForMember(res => res.PhotoPath, o => o.MapFrom(model => model.Photos))
                             ;
 
 
