@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { CommunicatorService } from './services/communicator.service';
 import { BookdefService } from './services/bookdef.service';
 import { WriterFormComponent } from './components/writer-form/writer-form.component';
@@ -25,6 +26,8 @@ import { MiscService } from './services/misc.service';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { PhotoService } from './services/photo.service';
 import { FrontPageComponent } from './components/front-page/front-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
@@ -40,6 +43,8 @@ import { FrontPageComponent } from './components/front-page/front-page.component
     BookInstComponent,
     BookListComponent,
     FrontPageComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,9 +61,11 @@ import { FrontPageComponent } from './components/front-page/front-page.component
       { path: 'bookinst-form', component: BookInstComponent },
       { path: 'booklist-form', component: BookListComponent },
       { path: 'frontPage', component: FrontPageComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
     ])
   ],
-  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService
+  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]

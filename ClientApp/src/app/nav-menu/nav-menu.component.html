@@ -41,7 +41,12 @@
                     <a [routerLink]='["/frontPage"]' (click)='collapse()'>
                         <span class='glyphicon glyphicon-education'></span> Front Page
                     </a>
-            </li>                
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]='["/login"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-education'></span> Login
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

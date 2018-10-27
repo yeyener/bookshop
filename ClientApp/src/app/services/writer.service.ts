@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -7,10 +8,10 @@ export class WriterService {
 
   private readonly apiEndPoint = 'api/writers/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAll() {
-    return this.http.get(this.apiEndPoint + 'getAll');
+    return this.http.get(this.apiEndPoint + 'getAll', { headers : this.authService.createHttpHeaderFromJwt() });
   }
 
   getAllNames() {

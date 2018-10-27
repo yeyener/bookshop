@@ -1,0 +1,14 @@
+
+<h2>Sign up</h2>
+
+<form (ngSubmit)="signup()">
+
+  Username <div class="form-group"><label for="userName"></label><input id="userName" [(ngModel)]="user.name" name="userName" type="text" class="form-control"></div>
+  E-mail<div class="form-group"><label for="eMail"></label><input id="eMail" [(ngModel)]="user.email" name="userName" type="email" class="form-control"></div>
+  Password <div class="form-group"><label for="userPassword"></label><input id="userPassword" [(ngModel)]="user.password" name="userPassword"  type="password" class="form-control password "></div>
+  Repeat password <div class="form-group"><label for="userPasswordRepeat"></label><input id="userPasswordRepeat" [(ngModel)]="user.passwordRepeat" name="userPassword"  type="password" class="form-control password "></div>
+  
+  <button class="btn btn-primary" (click)="signup()" >Sign Up</button>
+ 
+
+</form>
