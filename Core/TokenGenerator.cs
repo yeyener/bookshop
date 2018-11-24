@@ -23,16 +23,21 @@ namespace bookshop.Core
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(a));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-            var tokeOptions = new JwtSecurityToken(
+            var tokenOptions = new JwtSecurityToken(
                 issuer: "http://localhost:5001",
                 audience: "http://localhost:5001",
-                claims: new List<Claim>(),
-                expires: DateTime.Now.AddMinutes(5),
+                claims: new List<Claim>() {new Claim(ClaimTypes.Country,"Turkey2"),new Claim(ClaimTypes.Role,"Admin"),new Claim(ClaimTypes.Role,"Vatandas")},
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: signinCredentials
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return tokenString;
+        }
+
+        private Claim createClaim(){
+            Claim c = new Claim(ClaimTypes.Role,"AdminYEY");
+            return c;
         }
     }
 }

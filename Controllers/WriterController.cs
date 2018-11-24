@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using bookshop.Attributes;
 using bookshop.Models;
 using bookshop.Persistance;
 using bookshop.Repositories;
 using bookshop.Resources;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bookshop.Controllers
@@ -18,6 +22,8 @@ namespace bookshop.Controllers
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
 
+        private static string s = "asdsad";
+
         public WriterController(IWriterRepo repo, IMapper mapper, IUnitOfWork uow)
         {
             this.uow = uow;
@@ -26,16 +32,12 @@ namespace bookshop.Controllers
 
         }
 
-        private void temp()
-        {
 
-        }
-
-
-
-        [HttpGet("getAll"), Authorize]
+        //[HttpGet("getAll"),Authorize(Policy = "CountryBasedAuthorize") ]
+        [HttpGet("getAll"),Authorize(Policy = "CountryBasedAuthorize")]
         public async Task<IActionResult> GetAll()
         {
+
             var writers = await this.repo.GetAll();
 
             return Ok(writers);
@@ -123,4 +125,5 @@ namespace bookshop.Controllers
             return writer;
         }
     }
+    
 }

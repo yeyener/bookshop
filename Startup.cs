@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using bookshop.Core;
@@ -78,9 +79,11 @@ namespace bookshop
 
                             ValidIssuer = "http://localhost:5001",
                             ValidAudience = "http://localhost:5001",
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("TokenKey").GetValue<string>("Default")))
                         };
             });
+
+            services.AddAuthorization(options => options.AddPolicy("CountryBasedAuthorize", policy => policy.RequireClaim(ClaimTypes.Country,"Turkey2") ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
