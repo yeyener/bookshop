@@ -84,6 +84,8 @@ namespace bookshop
             });
 
             services.AddAuthorization(options => options.AddPolicy("CountryBasedAuthorize", policy => policy.RequireClaim(ClaimTypes.Country,"Turkey2") ));
+            services.AddAuthorization(options => options.AddPolicy("CustomAuthorize", policy => policy.RequireClaim("Editorial","Full") ));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -43,7 +43,8 @@ namespace bookshop.Controllers
             return Ok(writers);
         }
 
-        [HttpGet("getAllNames")]
+        //
+        [HttpGet("getAllNames"),Authorize(Policy = "CustomAuthorize")]
         public async Task<IActionResult> GetAllNames()
         {
             var writers = await this.repo.GetAll();

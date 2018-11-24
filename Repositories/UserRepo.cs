@@ -17,7 +17,8 @@ namespace bookshop.Repositories
         }
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await context.Users.ToListAsync();
+            return await context.Users.Include(u => u.UserCustomClaims).ThenInclude(cc => cc.CustomClaim)
+                        .ToListAsync();
         }
 
         public void Create(User user){

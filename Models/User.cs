@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bookshop.Models
@@ -12,5 +14,12 @@ namespace bookshop.Models
         public string Password { get; set; }
 
         public string Salt{get;set;}
+
+        public Collection<UserCustomClaim> UserCustomClaims{get;set;}
+
+        public User()
+        {
+            UserCustomClaims = new Collection<UserCustomClaim>();
+        }
     }
 }

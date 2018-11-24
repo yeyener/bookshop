@@ -18,7 +18,8 @@ namespace bookshop.Repositories
         public async Task<IEnumerable<BookDef>> GetAll()
         {
             return await context.BookDefinitons
-                        .Include(b => b.Writer)                        
+                        .Include(b => b.Writer)
+                        .Include(b => b.BookDefGenres)
                         .ToListAsync();;
         }
 

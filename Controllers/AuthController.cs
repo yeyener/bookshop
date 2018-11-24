@@ -50,7 +50,7 @@ namespace bookshop.Controllers
             var userSalt = HashGenerator.StringToByteArray(dbUser.Salt);
             var hashPwd = HashGenerator.GenerateSaltedHash(HashGenerator.EncodedStringToByteArray(userRsc.Password), userSalt);
             if (HashGenerator.Compare(hashPwd, HashGenerator.StringToByteArray(dbUser.Password)))
-                return Ok(new { Token = this.tokenGenetator.Generate() });
+                return Ok(new { Token = this.tokenGenetator.Generate(dbUser) });
             else
                 return Unauthorized();
         }

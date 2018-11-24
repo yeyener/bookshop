@@ -25,6 +25,8 @@ namespace bookshop.Persistance
 
         public DbSet<User> Users{get;set;}
 
+        public DbSet<CustomClaim> CustomClaims{get;set;}
+
         public BookDbContext(DbContextOptions<Persistance.BookDbContext> options2) : base(options2)
         {
              
@@ -37,6 +39,14 @@ namespace bookshop.Persistance
             .HasOne(pt => pt.BookDef)
             .WithMany(p => p.BookDefGenres)
             .HasForeignKey(pt => pt.BookDefId);
+
+            builder.Entity<UserCustomClaim>().HasKey(u => new{ u.UserId, u.CustomClaimId });
+
+            builder.Entity<UserCustomClaim>()
+                .HasOne(u => u.User)
+                .WithMany(c => c.UserCustomClaims)
+                .HasForeignKey(k => k.UserId);
+
 
             //  builder.Entity<BookInst>().Property(r => r.Price)
             // .HasColumnType("decimal(8,2)")
