@@ -1,3 +1,4 @@
+import { RouteProtectorService } from './services/route-protector.service';
 import { AuthService } from './services/auth.service';
 import { CommunicatorService } from './services/communicator.service';
 import { BookdefService } from './services/bookdef.service';
@@ -56,7 +57,7 @@ import { SignupComponent } from './components/signup/signup.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'writer-form', component: WriterFormComponent },
+      { path: 'writer-form', component: WriterFormComponent , canActivate : [RouteProtectorService] },
       { path: 'bookdef-form', component: BookdefFormComponent },
       { path: 'bookinst-form', component: BookInstComponent },
       { path: 'booklist-form', component: BookListComponent },
@@ -65,7 +66,8 @@ import { SignupComponent } from './components/signup/signup.component';
       { path: 'signup', component: SignupComponent },
     ])
   ],
-  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService
+  providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,
+    RouteProtectorService
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]
