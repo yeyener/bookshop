@@ -29,7 +29,9 @@
         <td><input type="text" class="input-sm" [(ngModel)]="bookDef.name" /></td>
         <td><input type="text" class="input-sm" [(ngModel)]="bookDef.yearWritten" /> </td>
 
-        <td> <span *ngFor="let g of bookDef.genres; let isLast=last"> {{g.name}}{{isLast?'':', '}}</span> </td>
+        <td> <span *ngFor="let g of bookDef.genres; let isLast=last"> {{g.name}}{{isLast?'':', '}}</span>
+            <i class="glyphicon glyphicon-plus" (click)="showGenres(bookDef.genres)" ></i>
+        </td>
 
         <th><button class="input" (click)="updateBookDef(bookDef)" >Update</button></th>
         <th><button class="input" (click)="deleteBookDef(bookDef)" >Delete</button></th>
@@ -41,5 +43,12 @@
         <td><button class="input" (click)="createBookDef(newBookDef)" >Create</button></td>
     </tr>    
 </table>
+
+<ngx-smart-modal #myModal identifier="myModal">
+        <h1>Title</h1>
+        <p>Some stuff...</p>
+      
+        <button (click)="myModal.close()">Close</button>
+</ngx-smart-modal>
 
 

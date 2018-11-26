@@ -2,6 +2,7 @@ import { WriterService } from './../../services/writer.service';
 import { Component, OnInit } from '@angular/core';
 import { BookdefService } from '../../services/bookdef.service';
 import { Router } from '@angular/router';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-bookdef-form',
@@ -22,7 +23,8 @@ export class BookdefFormComponent implements OnInit {
 
   selectedWriterId: any;
 
-  constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router) {
+  constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
+    private  ngxSmartModalService: NgxSmartModalService) {
    }
 
   ngOnInit() {
@@ -64,6 +66,10 @@ export class BookdefFormComponent implements OnInit {
         this.newBookDef = {writerId : this.selectedWriterId };
 
       });
+    }
+
+    showGenres() {
+      this.ngxSmartModalService.getModal('myModal').open();
     }
 
 }

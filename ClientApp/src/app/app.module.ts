@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { ErrorHandler, enableProdMode } from '@angular/core';
 import { BookErrorHandler } from './handlers/bookErrorHandler';
 
@@ -53,6 +54,7 @@ import { SignupComponent } from './components/signup/signup.component';
     FormsModule,
     Ng2CompleterModule,
     CurrencyMaskModule,
+    NgxSmartModalModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
