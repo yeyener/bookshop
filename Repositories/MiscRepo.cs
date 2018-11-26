@@ -29,5 +29,10 @@ namespace bookshop.Repositories
         {
             return await context.Translators.ToListAsync();
         }
+
+        public async Task<IEnumerable<Genre>> GetGenres()
+        {
+            return await context.Genres.ToListAsync();
+        }
     }
 }

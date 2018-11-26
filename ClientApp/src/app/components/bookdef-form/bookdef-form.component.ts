@@ -1,3 +1,4 @@
+import { MiscService } from './../../services/misc.service';
 import { WriterService } from './../../services/writer.service';
 import { Component, OnInit } from '@angular/core';
 import { BookdefService } from '../../services/bookdef.service';
@@ -10,6 +11,8 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
   styleUrls: ['./bookdef-form.component.css']
 })
 export class BookdefFormComponent implements OnInit {
+
+  allGenres: any = [];
 
   writersAsKvps: any = [];
 
@@ -24,13 +27,15 @@ export class BookdefFormComponent implements OnInit {
   selectedWriterId: any;
 
   constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
-    private  ngxSmartModalService: NgxSmartModalService) {
+    private  ngxSmartModalService: NgxSmartModalService, private miscService: MiscService) {
    }
 
   ngOnInit() {
       this.writerService.getAllNamesAndIds().subscribe(a => {this.writersAsKvps = a;
         this.writersLoaded = Promise.resolve(true);
         });
+
+      this.miscService.getGenres().subscribe(a => {this.allGenres = a; });
   }
 
     onSelectWriter(selectedWriter: any) {
@@ -69,7 +74,8 @@ export class BookdefFormComponent implements OnInit {
     }
 
     showGenres() {
-      this.ngxSmartModalService.getModal('myModal').open();
+      alert(this.allGenres.length);
+      this.ngxSmartModalService.getModal('genresModal').open();
     }
 
 }

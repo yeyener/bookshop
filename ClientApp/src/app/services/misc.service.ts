@@ -19,4 +19,8 @@ export class MiscService {
   getPublishers() {
     return this.http.get(this.apiEndPoint + 'getPublishers');
   }
+
+  getGenres() {
+    return this.http.get(this.apiEndPoint + 'getGenres');
+  }
 }

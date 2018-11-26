@@ -11,5 +11,7 @@ namespace bookshop.Repositories
          Task<IEnumerable<Publisher>> GetPublishers();
 
          Task<IEnumerable<Translator>> GetTranslators();
+
+         Task<IEnumerable<Genre>> GetGenres();
     }
 }

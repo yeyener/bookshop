@@ -42,5 +42,13 @@ namespace bookshop.Controllers
                 kvps.Add(p.Id, p.Name);
             return Ok(kvps);
         }
+
+        [HttpGet("getGenres")]
+        public async Task<IActionResult> GetGenres(){
+            IDictionary<int,string> kvps = new Dictionary<int, string>();
+            foreach (var p in await this.repo.GetGenres())
+                kvps.Add(p.Id, p.Name);
+            return Ok(kvps);
+        }
     }
 }
