@@ -62,6 +62,7 @@ export class BookdefFormComponent implements OnInit {
         this.writersBookDefs = a;
         this.writersBookDefsLoaded = Promise.resolve(true);
         this.newBookDef = {writerId : this.selectedWriterId };
+
       });
     }
 

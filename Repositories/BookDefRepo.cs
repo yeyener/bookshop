@@ -19,7 +19,7 @@ namespace bookshop.Repositories
         {
             return await context.BookDefinitons
                         .Include(b => b.Writer)
-                        .Include(b => b.BookDefGenres)
+                        .Include(b => b.BookDefGenres).ThenInclude(bdg => bdg.Genre)
                         .ToListAsync();;
         }
 

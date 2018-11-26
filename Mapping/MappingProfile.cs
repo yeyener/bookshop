@@ -25,7 +25,8 @@ namespace bookshop.Mapping
 
 
             CreateMap<BookDef, BookDefResource>()
-                .ForMember(res => res.WriterName, o => o.MapFrom(model => model.Writer.Name));
+                .ForMember(res => res.WriterName, o => o.MapFrom(model => model.Writer.Name))
+                .ForMember(res => res.Genres, o => o.MapFrom(model => model.BookDefGenres.Select(a => a.Genre).ToList()));
 
             // client >>> server
             //CreateMap<BookInstResourceClient, BookInst>().ForMember(v =>v.Definition, opt => opt.Ignore());
