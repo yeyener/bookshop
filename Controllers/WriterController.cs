@@ -22,8 +22,6 @@ namespace bookshop.Controllers
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
 
-        private static string s = "asdsad";
-
         public WriterController(IWriterRepo repo, IMapper mapper, IUnitOfWork uow)
         {
             this.uow = uow;
@@ -32,9 +30,7 @@ namespace bookshop.Controllers
 
         }
 
-
-        //[HttpGet("getAll"),Authorize(Policy = "CountryBasedAuthorize") ]
-        [HttpGet("getAll"),Authorize(Policy = "CountryBasedAuthorize")]
+        [HttpGet("getAll"),Authorize(Policy = "EditorialAuth")]
         public async Task<IActionResult> GetAll()
         {
 
@@ -43,15 +39,11 @@ namespace bookshop.Controllers
             return Ok(writers);
         }
 
-        //
-        [HttpGet("getAllNames"),Authorize(Policy = "CustomAuthorize")]
+        
+        [HttpGet("getAllNames"),Authorize(Policy = "EditorialAuth")]
         public async Task<IActionResult> GetAllNames()
         {
             var writers = await this.repo.GetAll();
-            // Dictionary<int,string> names = new Dictionary<int, string>();
-
-            // foreach (Writer w in writers)
-            //     names.Add(w.Id, w.Name);
 
             List<string> names = new List<string>();
             foreach (Writer w in writers)
@@ -69,10 +61,6 @@ namespace bookshop.Controllers
             foreach (Writer w in writers)
                 names.Add(w.Id, w.Name);
 
-            // List<string> names = new List<string>();
-            // foreach (Writer w in writers)
-            //      names.Add(w.Name);
-
             return Ok(names);
         }
 
@@ -82,8 +70,6 @@ namespace bookshop.Controllers
         {
             var writer = mapper.Map<WriterResourceClient, Writer>(writerRes);
             repo.Create(writer);
-
-            //context.SaveChangesAsync();
 
             var writers = await this.repo.GetAll();
             var justCreated = writers.Where(a => a.Name == writerRes.Name);

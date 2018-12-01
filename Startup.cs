@@ -86,8 +86,7 @@ namespace bookshop
 
             services.AddSwaggerGen(c =>{ c.SwaggerDoc("v1", new Info { Title = "BookShop API", Version = "v1" });});
 
-            services.AddAuthorization(options => options.AddPolicy("CountryBasedAuthorize", policy => policy.RequireClaim(ClaimTypes.Country,"Turkey2") ));
-            services.AddAuthorization(options => options.AddPolicy("CustomAuthorize", policy => policy.RequireClaim("Editorial","Full") ));
+            services.AddAuthorization(options => options.AddPolicy("EditorialAuth", policy => policy.RequireClaim("Editorial","Full") ));
             
         }
 
