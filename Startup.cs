@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace bookshop
 {
@@ -83,6 +84,8 @@ namespace bookshop
                         };
             });
 
+            services.AddSwaggerGen(c =>{ c.SwaggerDoc("v1", new Info { Title = "BookShop API", Version = "v1" });});
+
             services.AddAuthorization(options => options.AddPolicy("CountryBasedAuthorize", policy => policy.RequireClaim(ClaimTypes.Country,"Turkey2") ));
             services.AddAuthorization(options => options.AddPolicy("CustomAuthorize", policy => policy.RequireClaim("Editorial","Full") ));
             
@@ -101,6 +104,9 @@ namespace bookshop
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(a => {a.SwaggerEndpoint("/swagger/v1/swagger.json", "BookShop API V1"); a.RoutePrefix = string.Empty; });
 
             app.UseAuthentication();
 
