@@ -43,6 +43,7 @@ export class ModalCheckBoxComponent implements OnInit {
 
   onSave() {
     this.saveEvent.emit({selected : this.ngxSmartModalService.getModalData('chckBoxModel').all.filter(a => a.checked)});
+    this.ngxSmartModalService.getModal('chckBoxModel').close();
   }
 
   cleanData() {

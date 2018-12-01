@@ -30,7 +30,7 @@
         <td><input type="text" class="input-sm" [(ngModel)]="bookDef.yearWritten" /> </td>
 
         <td> <span *ngFor="let g of bookDef.genres; let isLast=last"> {{g.name}}{{isLast?'':', '}}</span>
-            <i class="glyphicon glyphicon-plus" (click)="showGenres(bookDef.genres)" ></i>
+            <i class="glyphicon glyphicon-plus" (click)="showGenres(bookDef.id,bookDef.genres)" ></i>
         </td>
 
         <th><button class="input" (click)="updateBookDef(bookDef)" >Update</button></th>

@@ -27,4 +27,8 @@ export class BookdefService {
     return this.http.delete(this.apiEndPoint + bookDef.id );
   }
 
+  updateGenresOfBookDef(bookDefId, genreIds) {
+    return this.http.patch(this.apiEndPoint + 'updateGenres/' + bookDefId , genreIds);
+  }
+
 }

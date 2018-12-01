@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -16,21 +17,24 @@ namespace bookshop.Controllers
     public class BookDefController : Controller
     {
         private readonly IBookDefRepo repo;
+        private readonly IMiscRepo miscRepo;
         private readonly IMapper mapper;
-        private readonly IBookDefResCliValidator cliValidator;        
+        private readonly IBookDefResCliValidator cliValidator;
         private readonly IUnitOfWork uow;
-        public BookDefController(IBookDefRepo repo, IMapper mapper, IBookDefResCliValidator cliValidator, IUnitOfWork uow)
+        public BookDefController(IBookDefRepo repo, IMapper mapper, IBookDefResCliValidator cliValidator, IUnitOfWork uow, IMiscRepo miscRepo)
         {
-            this.uow = uow;            
+            this.miscRepo = miscRepo;
+            this.uow = uow;
             this.cliValidator = cliValidator;
             this.mapper = mapper;
             this.repo = repo;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<BookDef>> GetBookDefinitions()
+        public async Task<IEnumerable<BookDefResource>> GetBookDefinitions()
         {
-            return await this.repo.GetAll();
+            var bookDefs = await this.repo.GetAll();
+            return Mapper.Map<IEnumerable<BookDef>, IEnumerable<BookDefResource>>(bookDefs);
         }
 
         [HttpGet("getWritersBookDefs")]
@@ -46,14 +50,14 @@ namespace bookshop.Controllers
         {
             var bookDefs = await this.repo.GetAll();
             bookDefs = bookDefs.Where(bd => bd.WriterId == writerId);
-            
-            IDictionary<int,string> kvps = new Dictionary<int, string>();
+
+            IDictionary<int, string> kvps = new Dictionary<int, string>();
             foreach (var bookDef in bookDefs)
                 kvps.Add(bookDef.Id, bookDef.Name);
 
             return Ok(kvps);
         }
-        
+
 
 
         [HttpPost("create")]
@@ -91,6 +95,34 @@ namespace bookshop.Controllers
             return Ok();
         }
 
+        [HttpPatch("updateGenres/{id}")]
+        public async Task<IActionResult> UpdateGenres(int id, [FromBody]List<int> genreIds)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var toUpdate = await getBookDef(id);
+            toUpdate.BookDefGenres = await convert(genreIds, toUpdate);
+
+            await uow.CompleteAsync();
+
+            return Ok();
+        }
+
+        private async Task<Collection<BookDefGenre>> convert(IEnumerable<int> genreIDs, BookDef bookDef)
+        {
+            var genres = await this.miscRepo.GetGenres();
+            Collection<BookDefGenre> retVal = new Collection<BookDefGenre>();
+            foreach (var genreId in genreIDs)
+            {
+                retVal.Add(new BookDefGenre() { BookDef = bookDef, BookDefId = bookDef.Id, Genre = genres.FirstOrDefault(a => a.Id == genreId), GenreId = genreId });
+            }
+
+            return retVal;
+        }
+
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -100,7 +132,7 @@ namespace bookshop.Controllers
 
             var toDelete = await getBookDef(id);
             this.repo.Remove(toDelete);
-                       
+
 
             await uow.CompleteAsync();
 

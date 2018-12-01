@@ -3,10 +3,7 @@ import { WriterService } from './../../services/writer.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BookdefService } from '../../services/bookdef.service';
 import { Router } from '@angular/router';
-import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ModalCheckBoxComponent } from '../modal-check-box/modal-check-box.component';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-bookdef-form',
@@ -30,6 +27,7 @@ export class BookdefFormComponent implements OnInit {
 
   selectedWriterId: any;
 
+  selectedBookId = -1;
   currenBooksGenres: any[]; // checkbox component'e her book def için input olarak geçirileceği için dinamik olması gerek
 
   constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
@@ -82,16 +80,19 @@ export class BookdefFormComponent implements OnInit {
       });
     }
 
-    showGenres(currentGenres) {
+    showGenres(id, currentGenres) {
+      this.selectedBookId = id;
       this.currenBooksGenres = currentGenres;
       this.modalCheckBox.allItemsParam = this.allGenres;
       this.modalCheckBox.selectedItemsOnOpenParam = currentGenres;
       this.modalCheckBox.showGenres();
+
     }
 
     saveGenres(selectedGenres) {
-      // alert(selectedGenres.selected[0].name);
-
+      this.bookDefService.updateGenresOfBookDef(this.selectedBookId, selectedGenres.selected.map(a => a.id)).subscribe( a => {
+        this.populateBookDefs(this.selectedWriterId);
+      } );
     }
 
 }
