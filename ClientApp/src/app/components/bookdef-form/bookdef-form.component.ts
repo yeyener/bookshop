@@ -1,9 +1,12 @@
 import { MiscService } from './../../services/misc.service';
 import { WriterService } from './../../services/writer.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BookdefService } from '../../services/bookdef.service';
 import { Router } from '@angular/router';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ModalCheckBoxComponent } from '../modal-check-box/modal-check-box.component';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-bookdef-form',
@@ -18,6 +21,7 @@ export class BookdefFormComponent implements OnInit {
 
   writersLoaded: Promise<boolean>;
   writersBookDefsLoaded: Promise<boolean>;
+  allGenresLoaded: Promise<boolean>;
 
   writersBookDefs: any = [];
 
@@ -26,8 +30,10 @@ export class BookdefFormComponent implements OnInit {
 
   selectedWriterId: any;
 
+  currenBooksGenres: any[]; // checkbox component'e her book def için input olarak geçirileceği için dinamik olması gerek
+
   constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
-    private  ngxSmartModalService: NgxSmartModalService, private miscService: MiscService) {
+    private miscService: MiscService, private modalCheckBox: ModalCheckBoxComponent) {
    }
 
   ngOnInit() {
@@ -35,7 +41,10 @@ export class BookdefFormComponent implements OnInit {
         this.writersLoaded = Promise.resolve(true);
         });
 
-      this.miscService.getGenres().subscribe(a => {this.allGenres = a; });
+      this.miscService.getGenres().subscribe(a => {this.allGenres = a;
+        this.allGenresLoaded = Promise.resolve(true);
+      });
+
   }
 
     onSelectWriter(selectedWriter: any) {
@@ -73,9 +82,16 @@ export class BookdefFormComponent implements OnInit {
       });
     }
 
-    showGenres() {
-      alert(this.allGenres.length);
-      this.ngxSmartModalService.getModal('genresModal').open();
+    showGenres(currentGenres) {
+      this.currenBooksGenres = currentGenres;
+      this.modalCheckBox.allItemsParam = this.allGenres;
+      this.modalCheckBox.selectedItemsOnOpenParam = currentGenres;
+      this.modalCheckBox.showGenres();
+    }
+
+    saveGenres(selectedGenres) {
+      // alert(selectedGenres.selected[0].name);
+
     }
 
 }

@@ -30,6 +30,7 @@ import { PhotoService } from './services/photo.service';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ModalCheckBoxComponent } from './components/modal-check-box/modal-check-box.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { SignupComponent } from './components/signup/signup.component';
     FrontPageComponent,
     LoginComponent,
     SignupComponent,
+    ModalCheckBoxComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,7 +71,7 @@ import { SignupComponent } from './components/signup/signup.component';
     ])
   ],
   providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,
-    RouteProtectorService
+    RouteProtectorService, ModalCheckBoxComponent
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]

@@ -44,11 +44,8 @@
     </tr>    
 </table>
 
-<ngx-smart-modal #genresModal identifier="genresModal">
-        <h1>Title</h1>
-        <p>Some stuff...</p>
-      
-        <button (click)="genresModal.close()">Close</button>
-</ngx-smart-modal>
+<app-modal-check-box (saveEvent)=saveGenres($event) >
+        
+</app-modal-check-box>
 
 

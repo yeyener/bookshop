@@ -46,9 +46,9 @@ namespace bookshop.Controllers
         [HttpGet("getGenres")]
         public async Task<IActionResult> GetGenres(){
             IDictionary<int,string> kvps = new Dictionary<int, string>();
-            foreach (var p in await this.repo.GetGenres())
-                kvps.Add(p.Id, p.Name);
-            return Ok(kvps);
+            var genres = await this.repo.GetGenres();
+                
+            return Ok(genres);
         }
     }
 }
