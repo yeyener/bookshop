@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using bookshop.Controllers;
 
 namespace bookshop.Resources
 {
@@ -35,7 +36,9 @@ namespace bookshop.Resources
 
        public string TranslatorName { get; set; }
 
-       public string PhotoPath {get;set;}
+       public string PhotoPath {get{ return PhotosController.UploadFolderName + "/" + PhotoFileName ; } private set{}}
+
+       public string PhotoFileName {get;set;}
       
     }
 }

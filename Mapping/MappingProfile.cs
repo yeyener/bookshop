@@ -6,6 +6,7 @@ using bookshop.Models;
 using bookshop.QueryObjects;
 using bookshop.QueryObjects.Resources;
 using bookshop.Resources;
+using Microsoft.Extensions.Configuration;
 
 namespace bookshop.Mapping
 {
@@ -13,6 +14,7 @@ namespace bookshop.Mapping
     {
         public MappingProfile()
         {
+            
             //  server >>> client
             CreateMap<BookInstPhoto,PhotoResource>();
             CreateMap<BookInst, BookInstResource>()
@@ -20,7 +22,7 @@ namespace bookshop.Mapping
                             .ForMember(bires => bires.LanguageName, act => act.MapFrom( bi => bi.Language.Name))
                             .ForMember(bires => bires.PublisherName, act => act.MapFrom( bi => bi.Publisher.Name))
                             .ForMember(res => res.DefinitionId, o => o.MapFrom(model => model.Definition.Id) )
-                            .ForMember(res => res.PhotoPath, o => o.MapFrom(model => model.Photos))
+                            .ForMember(res => res.PhotoFileName, o => o.MapFrom(model => model.Photos.Count > 0 ? model.Photos.FirstOrDefault().FileName : ""))
                             ;
 
 

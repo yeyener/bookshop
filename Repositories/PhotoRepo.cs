@@ -20,7 +20,7 @@ namespace bookshop.Repositories
             this.context.Photos.Add(photo);
         }
 
-        public async Task<IEnumerable<BookInstPhoto>> GetPhotosAsync(int vehicleId)
+        public async Task<IEnumerable<BookInstPhoto>> GetPhotosAsync(int bookInstId)
         {
             return await this.context.Photos.ToListAsync();
         }

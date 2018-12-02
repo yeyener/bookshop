@@ -20,7 +20,7 @@ export class FrontPageComponent implements OnInit {
   }
 
   getBooks() {
-    this.bookInstService.getByCustom('').subscribe(
+    this.bookInstService.get().subscribe(
       a => {this.instances = <BookInstance[]>a;  this.booksLoaded = Promise.resolve(true); },
       err => this.errHandler.handleError(err));
   }

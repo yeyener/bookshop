@@ -19,6 +19,10 @@ export class BookInstService {
     return this.http.delete(this.endPointUrl + biId);
   }
 
+  get() {
+    return this.http.get(this.endPointUrl);
+  }
+
   getByCustom(queryObject) {
      return this.http.get(this.endPointUrl + 'getByCustom?' + this.toQueryString(queryObject));
   }

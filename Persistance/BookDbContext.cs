@@ -47,12 +47,6 @@ namespace bookshop.Persistance
                 .WithMany(c => c.UserCustomClaims)
                 .HasForeignKey(k => k.UserId);
 
-
-            //  builder.Entity<BookInst>().Property(r => r.Price)
-            // .HasColumnType("decimal(8,2)")
-            // .IsRequired(true);
-
-
         }
     }
 }

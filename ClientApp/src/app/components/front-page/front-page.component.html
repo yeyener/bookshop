@@ -1,5 +1,26 @@
-<div *ngIf="booksLoaded">
 
-  
+<div class="wrap" style="text-align: center" >
+    ORTA YAZI
+</div>
+
+<div *ngIf="booksLoaded" style="text-align: center" >
+
+    <div class="container" >
+        <h1>Bootstrap 3 Responsive Image Grid</h1>
+        <hr>
+        
+
+        <div class="row" *ngFor="let listOfFour of instances">
+                <div *ngFor="let book of listOfFour">
+                        <div class="col-xs-3">
+                                <a href="#" class="thumbnail">
+                                     <img src={{book.photoPath}} class="img-responsive">
+                                </a>
+                                {{book.bookName}}
+                        </div>
+                </div>
+        </div>
+</div>
+        
 
 </div>

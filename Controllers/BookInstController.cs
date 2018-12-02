@@ -54,8 +54,21 @@ namespace bookshop.Controllers
                 return NotFound();
 
             var instResource = mapper.Map<IEnumerable<BookInst>, IEnumerable<BookInstResource>>(book);
+            var instResAsLists =  lists<BookInstResource>(instResource, 4);
+            return Ok(instResAsLists);
+        }
 
-            return Ok(instResource);
+        private IEnumerable<IEnumerable<T>> lists<T>(IEnumerable<T> items, int itemInEachSubList){
+            List<List<T>> list = new List<List<T>>();
+
+            int index = 0;
+            foreach(T item in items){
+                if (index++ % itemInEachSubList == 0){
+                    list.Add(new List<T>());
+                }
+                list.LastOrDefault().Add(item);
+            }
+            return list;
         }
 
 

@@ -37,9 +37,10 @@ namespace bookshop.Models
 
        public decimal Price{get;set;}
 
-       public ICollection<BookInstPhoto> Photos = new Collection<BookInstPhoto>();
+       public ICollection<BookInstPhoto> Photos{get;set;}
 
-
-       
+       public BookInst(){
+           Photos = new Collection<BookInstPhoto>();
+       }       
     }
 }

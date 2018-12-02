@@ -23,7 +23,9 @@ namespace bookshop.Repositories
 
         public async Task<IEnumerable<BookInst>> GetAll(){
             return await context.BookInstances
-                        .Include(bi => bi.Definition).ToListAsync();
+                        .Include(bi => bi.Definition)
+                        .Include(bi => bi.Photos)
+                        .ToListAsync();
         }
 
         public async Task<IEnumerable<BookInst>> GetAllByWriterId(int writerId){
