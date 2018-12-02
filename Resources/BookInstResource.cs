@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using bookshop.Controllers;
+using Microsoft.Extensions.Configuration;
 
 namespace bookshop.Resources
 {
@@ -36,8 +37,11 @@ namespace bookshop.Resources
 
        public string TranslatorName { get; set; }
 
-       public string PhotoPath {get{ return PhotosController.UploadFolderName + "/" + PhotoFileName ; } private set{}}
-
+       public string PhotoPath {get{ return PhotosController.UploadFolderName + "/" + (
+                                    !string.IsNullOrEmpty(PhotoFileName) 
+                                    ?PhotoFileName 
+                                    : Startup.StaticConfigYey.GetSection("PhotoSettings").GetValue<string>("ReplacementImage")
+                                    );} private set{}}
        public string PhotoFileName {get;set;}
       
     }
