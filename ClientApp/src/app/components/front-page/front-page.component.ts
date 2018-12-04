@@ -1,3 +1,4 @@
+import { FrontPageService } from './../../services/front-page.service';
 import { BookErrorHandler } from './../../handlers/bookErrorHandler';
 import { BookInstService } from './../../services/book-inst.service';
 import { BookInstance } from './../../pocos/bookInstance';
@@ -13,7 +14,10 @@ export class FrontPageComponent implements OnInit {
   private instances: BookInstance[];
   private booksLoaded: Promise<boolean>;
 
-  constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler) { }
+  private cartItems: any = [];
+
+  constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler, private fpService: FrontPageService) {
+  }
 
   ngOnInit() {
     this.getBooks();
@@ -23,6 +27,17 @@ export class FrontPageComponent implements OnInit {
     this.bookInstService.get().subscribe(
       a => {this.instances = <BookInstance[]>a;  this.booksLoaded = Promise.resolve(true); },
       err => this.errHandler.handleError(err));
+  }
+
+  addBookToCart(bookId) {
+    this.fpService.addBookToCart(bookId).subscribe(
+      a => { alert('Added to cart : ' + a); this.cartItems = a; },
+      err => this.errHandler.handleError(err)
+    );
+  }
+
+  goToCart() {
+    alert('Not impelemented yet');
   }
 
 }

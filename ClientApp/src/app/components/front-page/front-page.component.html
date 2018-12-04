@@ -1,9 +1,14 @@
 
-<div class="wrap" style="text-align: center" >
-    ORTA YAZI
+<div style="margin-left:auto; margin-right:0;" >
+        <i  class="glyphicon glyphicon-shopping-cart" (click)="goToCart()" ></i>
+        {{cartItems.length}}
 </div>
 
+
+
 <div *ngIf="booksLoaded" style="text-align: center" >
+
+        
 
     <div class="container" >
         <h1>Bootstrap 3 Responsive Image Grid</h1>
@@ -16,7 +21,8 @@
                                 <a href="#" class="thumbnail">
                                      <img src={{book.photoPath}} class="img-responsive">
                                 </a>
-                                {{book.bookName}}
+                                {{book.bookName}}                                
+                                <i class="glyphicon glyphicon-plus" (click)="addBookToCart(book.id)" ></i>
                         </div>
                 </div>
         </div>

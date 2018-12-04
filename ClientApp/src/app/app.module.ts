@@ -1,3 +1,4 @@
+import { FrontPageService } from './services/front-page.service';
 import { RouteProtectorService } from './services/route-protector.service';
 import { AuthService } from './services/auth.service';
 import { CommunicatorService } from './services/communicator.service';
@@ -71,7 +72,7 @@ import { ModalCheckBoxComponent } from './components/modal-check-box/modal-check
     ])
   ],
   providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,
-    RouteProtectorService, ModalCheckBoxComponent
+    RouteProtectorService, ModalCheckBoxComponent, FrontPageService
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
@@ -9,6 +10,7 @@ using bookshop.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -36,8 +38,23 @@ namespace bookshop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddDistributedMemoryCache();
+
+            services.AddHttpContextAccessor();
+
+            services.AddSession( options => { options.IdleTimeout = TimeSpan.FromSeconds(10);
+                                              options.Cookie.HttpOnly = true; });
+
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                              .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore); 
+
 
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
 
@@ -105,6 +122,8 @@ namespace bookshop
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseSession();
 
             app.UseSwagger();
 

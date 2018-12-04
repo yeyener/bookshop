@@ -13,7 +13,7 @@ export class BookErrorHandler implements ErrorHandler {
         } else {
             messagge += 'Main error contains no information';
         }
-        messagge += '\nDETAILS:\n';
+        messagge += '\nDETAILS (BookErrorHandler) :\n';
 
         if (error.error !== null) {
             messagge += error.error;
