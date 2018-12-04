@@ -39,6 +39,8 @@ namespace bookshop.Models
 
        public ICollection<BookInstPhoto> Photos{get;set;}
 
+       public bool Featured{get;set;}
+
        public BookInst(){
            Photos = new Collection<BookInstPhoto>();
        }       
