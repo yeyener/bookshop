@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
 import { FrontPageService } from './../../services/front-page.service';
 import { BookErrorHandler } from './../../handlers/bookErrorHandler';
 import { BookInstService } from './../../services/book-inst.service';
@@ -16,10 +18,14 @@ export class FrontPageComponent implements OnInit {
 
   private cartItems: any = [];
 
-  constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler, private fpService: FrontPageService) {
+  private userLoggedIn = false;
+
+  constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler, private fpService: FrontPageService,
+     private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.userLoggedIn = !this.authService.isExpired();
     this.getBooks();
   }
 
@@ -38,6 +44,14 @@ export class FrontPageComponent implements OnInit {
 
   goToCart() {
     alert('Not impelemented yet');
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

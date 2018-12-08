@@ -1,3 +1,4 @@
+import { JwtHelper } from 'angular2-jwt';
 import { FrontPageService } from './services/front-page.service';
 import { RouteProtectorService } from './services/route-protector.service';
 import { AuthService } from './services/auth.service';
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+
 import { ErrorHandler, enableProdMode } from '@angular/core';
 import { BookErrorHandler } from './handlers/bookErrorHandler';
 
@@ -33,6 +35,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ModalCheckBoxComponent } from './components/modal-check-box/modal-check-box.component';
 import { NavBarService } from './services/nav-bar.service';
+
 
 
 @NgModule({
@@ -60,20 +63,21 @@ import { NavBarService } from './services/nav-bar.service';
     CurrencyMaskModule,
     NgxSmartModalModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      // { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: FrontPageComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'writer-form', component: WriterFormComponent , canActivate : [RouteProtectorService] },
       { path: 'bookdef-form', component: BookdefFormComponent },
       { path: 'bookinst-form', component: BookInstComponent },
       { path: 'booklist-form', component: BookListComponent },
-      { path: 'frontPage', component: FrontPageComponent },
+      { path: 'frontPage', component: FrontPageComponent  },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
     ])
   ],
   providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,
-    RouteProtectorService, ModalCheckBoxComponent, FrontPageService, NavBarService
+    RouteProtectorService, ModalCheckBoxComponent, FrontPageService, NavBarService, JwtHelper
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]

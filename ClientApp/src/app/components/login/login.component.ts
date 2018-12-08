@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
       res => {
          const t = (<any>res).token ;
          localStorage.setItem('jwt', t);
+         this.router.navigate(['/writer-form']);
          console.log(t);
       } ,
       err => this.errHandler.handleError(err));

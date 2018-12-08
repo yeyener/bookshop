@@ -2,6 +2,9 @@
 <div style="margin-left:auto; margin-right:0;" >
         <i  class="glyphicon glyphicon-shopping-cart" (click)="goToCart()" ></i>
         {{cartItems.length}}
+
+        <button *ngIf="!userLoggedIn" type="button" class="btn btn-primary" (click)="goToLogin()" >Login</button>
+        <button *ngIf="userLoggedIn" type="button" class="btn btn-primary" (click)="logout()" >Logout</button>
 </div>
 
 
