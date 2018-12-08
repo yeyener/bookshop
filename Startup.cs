@@ -127,7 +127,7 @@ namespace bookshop
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(a => {a.SwaggerEndpoint("/swagger/v1/swagger.json", "BookShop API V1"); a.RoutePrefix = string.Empty; });
+            app.UseSwaggerUI(a => {a.SwaggerEndpoint("/swagger/v1/swagger.json", "BookShop API V1"); a.RoutePrefix = "swaggerPage"; });
 
             app.UseAuthentication();
 
