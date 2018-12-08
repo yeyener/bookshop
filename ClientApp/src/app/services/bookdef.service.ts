@@ -7,6 +7,10 @@ export class BookdefService {
   private readonly apiEndPoint = 'api/bookDefinitions/';
   constructor(private http: HttpClient) { }
 
+  getNames() {
+    return this.http.get(this.apiEndPoint + 'getNames');
+  }
+
   getWritersBookDefs(writerId) {
     return this.http.get(this.apiEndPoint + 'getWritersBookDefs?writerId=' + writerId);
   }

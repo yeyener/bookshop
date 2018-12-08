@@ -7,14 +7,30 @@
         <button *ngIf="userLoggedIn" type="button" class="btn btn-primary" (click)="logout()" >Logout</button>
 </div>
 
+                
+<table style="margin: 0px auto;">
+        <tr>
+                <td>
+        <app-auto-complete-text *ngIf="writersAndBooksLoaded"  [keyValuePairs]="writersAndBooks" (itemSelectedEvent)="onFrontPageSearch($event)" 
+                 [(searchKey)]="selectedBookOrWriter" [plhParam]="'Kitap adı'" [minSearchParam]="3" [inputClassParam]="'input-lg'" [textNoResultsParam]="'sonuç bulunamadı'" ></app-auto-complete-text>
+                </td>
+        </tr>
+</table>
+
+
+
+
 
 
 <div *ngIf="booksLoaded" style="text-align: center" >
 
+                
+
+    <div class="container" >        
+
+
         
 
-    <div class="container" >
-        <h1>Bootstrap 3 Responsive Image Grid</h1>
         <hr>
         
 

@@ -37,6 +37,18 @@ namespace bookshop.Controllers
             return Mapper.Map<IEnumerable<BookDef>, IEnumerable<BookDefResource>>(bookDefs);
         }
 
+         [HttpGet("getNames")]
+        public async Task<Dictionary<int, string>> GetNames()
+        {
+            Dictionary<int, string> names = new Dictionary<int, string>();
+            var bookDefs = await this.repo.GetAll();
+            foreach (var bookdef in bookDefs){
+                if (!names.ContainsValue(bookdef.Name))
+                    names.Add( bookdef.Id, bookdef.Name);
+            }
+            return names;
+        }
+
         [HttpGet("getWritersBookDefs")]
         public async Task<IEnumerable<BookDefResource>> GetBooksByWriter(int writerId)
         {

@@ -5,8 +5,8 @@ import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-auto-complete-text',
-  template : `<ng2-completer [(ngModel)]="searchStr" (change)="itemIsSelected()" [datasource]="valuesList" [minSearchLength]="0" >
-  </ng2-completer>`,
+  template : `<ng2-completer [(ngModel)]="searchStr" (change)="itemIsSelected()" [datasource]="valuesList"
+  [minSearchLength]="minSearchParam" [inputClass]="inputClassParam" [textNoResults]="textNoResultsParam"   ></ng2-completer>`,
 
   styleUrls: ['./auto-complete-text.component.css']
 })
@@ -16,7 +16,12 @@ export class AutoCompleteTextComponent implements OnInit {
   private keysList: any[];
   private valuesList: any[];
 
+  @Input() plhParam: string;
   @Input() keyValuePairs: any;
+  @Input() minSearchParam: string;
+  @Input() inputClassParam: string;
+  @Input() textNoResultsParam: string;
+
 
   // Bunu input olarak tanımadım. Output olarak searchKeyChange'de dönüyorum. searchKey ve searchKeyChange
   // isimlendirmeleri önemli imiş. Angular buradan anlıyormuş.
@@ -33,6 +38,9 @@ export class AutoCompleteTextComponent implements OnInit {
 
   constructor(private c: CompleterService) {
     this.completerService = c;
+    this.minSearchParam = '0';
+    this.plhParam = '';
+    this.inputClassParam = '';
 
     // this.dataService = c.remote(this.sourceList, 'name' )
 
@@ -48,7 +56,6 @@ export class AutoCompleteTextComponent implements OnInit {
     this.keysList = Object.keys(this.keyValuePairs);
     this.valuesList = Object.values(this.keyValuePairs);
   }
-
 
 
   itemIsSelected() {

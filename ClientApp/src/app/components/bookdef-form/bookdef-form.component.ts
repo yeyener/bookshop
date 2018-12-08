@@ -33,7 +33,7 @@ export class BookdefFormComponent implements OnInit {
 
   constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
     private miscService: MiscService, private modalCheckBox: ModalCheckBoxComponent, private navBarService: NavBarService,
-    private changeDetector: ChangeDetectorRef ) {
+    ) {
    }
 
 
