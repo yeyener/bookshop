@@ -1,3 +1,4 @@
+import { NavBarService } from './../services/nav-bar.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,17 +6,16 @@ import { Component } from '@angular/core';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
+
+// Mevcut Metot ve propertylere elleme!
+// İlk haline geri çevirdim. collapse olmadığı zaman navigation'da sayfaları iki kere yüklemeye, her comp'u
+// sıfırdan yüklemye çalışıyor. Patlıyor ve aşırı yavaşlıyor.
 export class NavMenuComponent {
   isExpanded = false;
-  isCollapsed = true;
-
-
-  collapse() {
+   collapse() {
     this.isExpanded = false;
   }
-
-  toggle() {
-    alert('a');
+   toggle() {
     this.isExpanded = !this.isExpanded;
   }
 }
