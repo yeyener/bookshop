@@ -76,6 +76,6 @@ import { NavBarService } from './services/nav-bar.service';
     RouteProtectorService, ModalCheckBoxComponent, FrontPageService, NavBarService
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
-  bootstrap: [FrontPageComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
