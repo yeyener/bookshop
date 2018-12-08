@@ -7,6 +7,8 @@ import { BookErrorHandler } from './../../handlers/bookErrorHandler';
 import { BookInstService } from './../../services/book-inst.service';
 import { BookInstance } from './../../pocos/bookInstance';
 import { Component, OnInit } from '@angular/core';
+import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
+
 
 @Component({
   selector: 'app-front-page',
@@ -48,8 +50,27 @@ export class FrontPageComponent implements OnInit {
 
   getBooks() {
     this.bookInstService.get().subscribe(
-      a => {this.instances = <BookInstance[]>a;  this.booksLoaded = Promise.resolve(true); },
+      a => { this.instances = <BookInstance[]>a; this.convert(a); this.booksLoaded = Promise.resolve(true); },
       err => this.errHandler.handleError(err));
+  }
+
+  // const jsonArray = <BookInstance[]>a ; jsonArray.forEach(element => {
+  //   this.instances.push(this.convert(element));
+
+  convert(jsonObject) {
+    const jsonConvert: JsonConvert = new JsonConvert();
+    jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+    jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+    jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL; // never allow null
+
+    // Map to the country class
+    let bi: BookInstance;
+    try {
+        bi = jsonConvert.deserialize(jsonObject, BookInstance);
+    } catch (e) {
+        console.log((<Error>e));
+    }
+    return bi;
   }
 
   addBookToCart(bookId) {
@@ -73,7 +94,7 @@ export class FrontPageComponent implements OnInit {
   }
 
   onFrontPageSearch() {
-    alert(this.selectedBookOrWriter);
+
   }
 
 }

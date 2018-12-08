@@ -5,6 +5,7 @@ import { BookInstService } from './../../services/book-inst.service';
 import { WriterService } from './../../services/writer.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
 
 @Component({
   selector: 'app-book-list',
@@ -37,9 +38,31 @@ export class BookListComponent implements OnInit {
   private populateList() {
     const q = this.createQueryObject();
     this.bookInstService.getByCustom(q).subscribe(a => {
-      this.bookInstanceList = <[BookInstance]>a;
+      const objArray = [];
+      const array = <[BookInstance]>a;
+      array.forEach(element => {
+        const c = this.convert(element);
+        objArray.push(c);
+      });
+      this.bookInstanceList = <[BookInstance]>objArray;
       this.bookListLoaded = Promise.resolve(true);
     });
+  }
+
+
+  convert(jsonObject) {
+    const jsonConvert: JsonConvert = new JsonConvert();
+    jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+    jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+    jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL; // never allow null
+
+    let bi: BookInstance;
+    try {
+        bi = jsonConvert.deserialize(jsonObject, BookInstance);
+    } catch (e) {
+        console.log((<Error>e));
+    }
+    return bi;
   }
 
   updateBookInst(bi: BookInstance ) {

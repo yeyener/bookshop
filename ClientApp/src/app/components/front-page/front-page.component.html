@@ -26,21 +26,18 @@
 
                 
 
-    <div class="container" >        
-
-
-        
-
+    <div class="container" >
         <hr>
         
-
         <div class="row" *ngFor="let listOfFour of instances">
                 <div *ngFor="let book of listOfFour">
                         <div class="col-xs-3">
                                 <a href="#" class="thumbnail">
                                      <img src={{book.photoPath}} class="img-responsive">
                                 </a>
-                                {{book.bookName}}                                
+                                {{book.bookName}}
+                                {{book.writerName}}
+                                {{book.sallamasyon}}
                                 <i class="glyphicon glyphicon-plus" (click)="addBookToCart(book.id)" ></i>
                         </div>
                 </div>

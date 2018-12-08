@@ -1,19 +1,55 @@
 import { DecimalPipe } from '@angular/common';
+import {JsonObject, JsonProperty} from 'json2typescript';
 
+@JsonObject('BookInstance')
 export class BookInstance {
-    id: number;
-    writerName: string;
-    bookName: string;
-    definitionId: number;
-    price: number;
-    numberInStock: number;
-    edition: number;
-    publisherName: string;
-    publisherId: number;
-    languageName: string;
-    languageId: number;
-    translatorId: number;
-    pageNumber: number;
+    @JsonProperty('id', Number)
+    id: number = undefined;
+
+    @JsonProperty('writerName', String)
+    writerName: string = undefined;
+
+    @JsonProperty('bookName', String)
+    bookName: string = undefined;
+
+    @JsonProperty('definitionId', Number)
+    definitionId: number = undefined;
+
+    @JsonProperty('price', Number)
+    price: number = undefined;
+
+    @JsonProperty('numberInStock', Number)
+    numberInStock: number = undefined;
+
+    @JsonProperty('edition', Number)
+    edition: number = undefined;
+
+    @JsonProperty('publisherName', String)
+    publisherName: string = undefined;
+
+    @JsonProperty('publisherId', Number)
+    publisherId: number = undefined;
+
+    @JsonProperty('languageName', String)
+    languageName: string = undefined;
+
+    @JsonProperty('languageId', Number)
+    languageId: number = undefined;
+
+    @JsonProperty('translatorId', Number)
+    translatorId: number = undefined;
+
+    @JsonProperty('pageNumber', Number)
+    pageNumber: number = undefined;
+
+    @JsonProperty('genres', [String])
+    genres: [string] = undefined;
+
+    @JsonProperty('photoPath', String)
+    photoPath: string = undefined;
+
+    sallamasyon = 'bir metin';
+
     // languageName: string;
 
     static createEmpty() {
