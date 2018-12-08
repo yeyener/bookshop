@@ -1,51 +1,62 @@
 <br/><br/><br/>
 
-<table>
-    <tr>
-        <td>Choose Writer</td>
-        <td>
-                <app-auto-complete-text *ngIf="writersLoaded" [keyValuePairs]="writersAsKvps" (itemSelectedEvent)="onSelectWriter($event)" 
-                 class="input-lg" ></app-auto-complete-text>
-        </td>
-        <td>
-            <button class="input" (click)="goToWriters()" >Create New Writer</button>
-        </td>
-    </tr>    
-</table>
-
-
-
-<table class="table" *ngIf="writersBookDefsLoaded">
-    <thead>
-        <th>Writer Name</th>
-        <th>Book Name</th>
-        <th>Date Written</th>
-        <th>Genres</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tr *ngFor="let bookDef of writersBookDefs" >
-        <td>{{bookDef.writerName}}</td>
-        <td><input type="text" class="input-sm" [(ngModel)]="bookDef.name" /></td>
-        <td><input type="text" class="input-sm" [(ngModel)]="bookDef.yearWritten" /> </td>
-
-        <td> <span *ngFor="let g of bookDef.genres; let isLast=last"> {{g.name}}{{isLast?'':', '}}</span>
-            <i class="glyphicon glyphicon-plus" (click)="showGenres(bookDef.id,bookDef.genres)" ></i>
-        </td>
-
-        <th><button class="input" (click)="updateBookDef(bookDef)" >Update</button></th>
-        <th><button class="input" (click)="deleteBookDef(bookDef)" >Delete</button></th>
-    </tr>
-    <tr>
-        <td>{{selectedWriterTxt}}</td>
-        <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.name" /></td>
-        <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.yearWritten"  ></td>
-        <td><button class="input" (click)="createBookDef(newBookDef)" >Create</button></td>
-    </tr>    
-</table>
-
-<app-modal-check-box (saveEvent)=saveGenres($event) >
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-sm-3'>
+      <app-nav-menu></app-nav-menu>
+    </div>
+    <div class='col-sm-9 body-content'>
+        <table>
+            <tr>
+                <td>Choose Writer</td>
+                <td>
+                        <app-auto-complete-text *ngIf="writersLoaded" [keyValuePairs]="writersAsKvps" (itemSelectedEvent)="onSelectWriter($event)" 
+                         class="input-lg" ></app-auto-complete-text>
+                </td>
+                <td>
+                    <button class="input" (click)="goToWriters()" >Create New Writer</button>
+                </td>
+            </tr>    
+        </table>
         
-</app-modal-check-box>
-
+        
+        
+        <table class="table" *ngIf="writersBookDefsLoaded">
+            <thead>
+                <th>Writer Name</th>
+                <th>Book Name</th>
+                <th>Date Written</th>
+                <th>Genres</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tr *ngFor="let bookDef of writersBookDefs" >
+                <td>{{bookDef.writerName}}</td>
+                <td><input type="text" class="input-sm" [(ngModel)]="bookDef.name" /></td>
+                <td><input type="text" class="input-sm" [(ngModel)]="bookDef.yearWritten" /> </td>
+        
+                <td> <span *ngFor="let g of bookDef.genres; let isLast=last"> {{g.name}}{{isLast?'':', '}}</span>
+                    <i class="glyphicon glyphicon-plus" (click)="showGenres(bookDef.id,bookDef.genres)" ></i>
+                </td>
+        
+                <th><button class="input" (click)="updateBookDef(bookDef)" >Update</button></th>
+                <th><button class="input" (click)="deleteBookDef(bookDef)" >Delete</button></th>
+            </tr>
+            <tr>
+                <td>{{selectedWriterTxt}}</td>
+                <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.name" /></td>
+                <td><input type="text" class="input-sm" [(ngModel)]="newBookDef.yearWritten"  ></td>
+                <td><button class="input" (click)="createBookDef(newBookDef)" >Create</button></td>
+            </tr>    
+        </table>
+        
+        <app-modal-check-box (saveEvent)=saveGenres($event) >
+                
+        </app-modal-check-box>
+        
+        
+        
+    </div>
+  </div>
+</div>
 

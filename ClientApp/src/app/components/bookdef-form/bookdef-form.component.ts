@@ -1,9 +1,10 @@
 import { MiscService } from './../../services/misc.service';
 import { WriterService } from './../../services/writer.service';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { BookdefService } from '../../services/bookdef.service';
 import { Router } from '@angular/router';
 import { ModalCheckBoxComponent } from '../modal-check-box/modal-check-box.component';
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-bookdef-form',
@@ -31,10 +32,14 @@ export class BookdefFormComponent implements OnInit {
   currenBooksGenres: any[]; // checkbox component'e her book def için input olarak geçirileceği için dinamik olması gerek
 
   constructor(private writerService: WriterService, private bookDefService: BookdefService, private router: Router,
-    private miscService: MiscService, private modalCheckBox: ModalCheckBoxComponent) {
+    private miscService: MiscService, private modalCheckBox: ModalCheckBoxComponent, private navBarService: NavBarService,
+    private changeDetector: ChangeDetectorRef ) {
    }
 
+
+
   ngOnInit() {
+      this.navBarService.show();
       this.writerService.getAllNamesAndIds().subscribe(a => {this.writersAsKvps = a;
         this.writersLoaded = Promise.resolve(true);
         });

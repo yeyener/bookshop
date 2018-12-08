@@ -17,6 +17,10 @@ export class NavBarService {
     this.showTheNavigationBar = true;
    }
 
+   getStatus() {
+     return this.showTheNavigationBar;
+   }
+
    decideAcoordingToRoute() {
 
    }
