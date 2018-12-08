@@ -21,7 +21,7 @@ export class ModalCheckBoxComponent implements OnInit {
     this.modalData.all = {};
   }
 
-  showGenres() {
+  showItems() {
     this.ngxSmartModalService.getModal('chckBoxModel').open();
     this.modalData.all = this.allItemsParam;
     this.modalData.current = this.selectedItemsOnOpenParam;

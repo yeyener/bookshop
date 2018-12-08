@@ -85,7 +85,7 @@ export class BookdefFormComponent implements OnInit {
       this.currenBooksGenres = currentGenres;
       this.modalCheckBox.allItemsParam = this.allGenres;
       this.modalCheckBox.selectedItemsOnOpenParam = currentGenres;
-      this.modalCheckBox.showGenres();
+      this.modalCheckBox.showItems();
 
     }
 

@@ -34,7 +34,7 @@ export class BookListComponent implements OnInit {
     this.populateList();
   }
 
-  private populateList(){
+  private populateList() {
     const q = this.createQueryObject();
     this.bookInstService.getByCustom(q).subscribe(a => {
       this.bookInstanceList = <[BookInstance]>a;
