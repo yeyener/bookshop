@@ -36,6 +36,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ModalCheckBoxComponent } from './components/modal-check-box/modal-check-box.component';
 import { NavBarService } from './services/nav-bar.service';
+import { JsonTsConverterService } from './json-ts-converter.service';
 
 
 
@@ -78,7 +79,7 @@ import { NavBarService } from './services/nav-bar.service';
     ])
   ],
   providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,
-    RouteProtectorService, ModalCheckBoxComponent, FrontPageService, NavBarService, JwtHelper
+    RouteProtectorService, ModalCheckBoxComponent, FrontPageService, NavBarService, JwtHelper, JsonTsConverterService
   // {provide: ErrorHandler, useClass: BookErrorHandler} Bu çalışmadı
   ],
   bootstrap: [AppComponent]

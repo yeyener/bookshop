@@ -48,7 +48,7 @@ export class BookInstance {
     @JsonProperty('photoPath', String)
     photoPath: string = undefined;
 
-    sallamasyon = 'bir metin';
+    sadeceTsdeOlanAlan = 'bir metin';
 
     // languageName: string;
 

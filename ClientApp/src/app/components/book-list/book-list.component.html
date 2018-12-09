@@ -30,6 +30,7 @@
                 <th>Language</th>
                 <th>Price</th>
                 <th>Number In Stock</th>
+                <th>TS değeri</th>
             </thead>
             <tbody>
                 <tr *ngFor="let bookInst of bookInstanceList" >
@@ -40,6 +41,7 @@
                     <td>{{bookInst.languageName}}</td>
                     <td>{{bookInst.price}}</td>
                     <td>{{bookInst.numberInStock}}</td>
+                    <td>{{bookInst.sadeceTsdeOlanAlan}}</td>
                     <th><button class="input" (click)="updateBookInst(bookInst)" >Update</button></th>
                     <th><button class="input" (click)="deleteBookInst(bookInst)" >Delete</button></th>
                 </tr>
