@@ -4,16 +4,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommunicatorService {
 
-  private bookInstanceContainer: BookInstance;
+  private container: any;
 
   constructor() { }
 
-  push(bi: BookInstance ) {
-    this.bookInstanceContainer = bi;
+  push<T>(bi: T ) {
+    this.container = bi;
   }
 
-  pop(): BookInstance {
-    return this.bookInstanceContainer;
+  pop<T>(): T {
+    return this.container;
   }
 
 }

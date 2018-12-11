@@ -1,0 +1,23 @@
+
+<div *ngIf="bookLoaded" style="text-align: center" >
+
+  
+      <hr>
+      
+
+      <a class="thumbnail">
+            <img src={{book.photoPath}} class="img-responsive">
+      </a>
+      {{book.bookName}}
+      {{book.writerName}}
+
+
+      {{book.sallamasyon}}
+      
+
+      <button class="btn btn-primary" (click)="addToCart(book.id)" >Add To Cart</button>
+
+
+      
+
+</div>

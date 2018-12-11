@@ -44,7 +44,7 @@ export class BookInstComponent implements OnInit {
 
   ngOnInit() {
       if (this.activatedRoute.snapshot.params['ref'] === 'list') {
-        const redirectObject = this.communicator.pop();
+        const redirectObject = this.communicator.pop<BookInstance>();
         if (redirectObject !== null && redirectObject !== void 0  && redirectObject.id > 0 ) {
           this.newBookInstance = redirectObject;
           this.gotEditInfo = Promise.resolve(true);

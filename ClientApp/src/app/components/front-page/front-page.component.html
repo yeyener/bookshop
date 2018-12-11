@@ -24,8 +24,6 @@
 
 <div *ngIf="booksLoaded" style="text-align: center" >
 
-                
-
     <div class="container" >
         <hr>
         
@@ -33,9 +31,9 @@
                 <div *ngFor="let book of listOfFour">
                         <div class="col-xs-3">
                                 <a href="#" class="thumbnail">
-                                     <img src={{book.photoPath}} class="img-responsive">
+                                     <img src={{book.photoPath}} class="img-responsive" [routerLink]="" (click)=goToPublicBookInst(book); >
                                 </a>
-                                {{book.bookName}}
+                                <a href="#" [routerLink]="" (click)="goToPublicBookInst(book);" >{{book.bookName}}</a>
                                 {{book.writerName}}
                                 {{book.sallamasyon}}
                                 <i class="glyphicon glyphicon-plus" (click)="addBookToCart(book.id)" ></i>

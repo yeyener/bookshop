@@ -37,6 +37,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ModalCheckBoxComponent } from './components/modal-check-box/modal-check-box.component';
 import { NavBarService } from './services/nav-bar.service';
 import { JsonTsConverterService } from './json-ts-converter.service';
+import { PublicBookInstComponent } from './components/public-book-inst/public-book-inst.component';
 
 
 
@@ -56,6 +57,7 @@ import { JsonTsConverterService } from './json-ts-converter.service';
     LoginComponent,
     SignupComponent,
     ModalCheckBoxComponent,
+    PublicBookInstComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -76,6 +78,7 @@ import { JsonTsConverterService } from './json-ts-converter.service';
       { path: 'frontPage', component: FrontPageComponent  },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
+      { path: 'public-book-inst', component: PublicBookInstComponent },
     ])
   ],
   providers: [WriterService, BookdefService, BookInstService, MiscService, CommunicatorService, BookErrorHandler, PhotoService, AuthService,

@@ -1,4 +1,5 @@
-import { JsonTsConverterService } from './../../json-ts-converter.service';
+import { CommunicatorService } from './../../services/communicator.service';
+import { JsonTsConverterService } from '../../json-ts-converter.service';
 import { BookdefService } from './../../services/bookdef.service';
 import { AutoCompleteTextComponent } from './../auto-complete-text/auto-complete-text.component';
 import { AuthService } from './../../services/auth.service';
@@ -33,7 +34,7 @@ export class FrontPageComponent implements OnInit {
 
   constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler, private fpService: FrontPageService,
      private router: Router, private authService: AuthService, private bookDefService: BookdefService,
-     private jsonTsConverter: JsonTsConverterService) {
+     private jsonTsConverter: JsonTsConverterService, private communicatorService: CommunicatorService) {
   }
 
   ngOnInit() {
@@ -78,6 +79,11 @@ export class FrontPageComponent implements OnInit {
 
   onFrontPageSearch() {
 
+  }
+
+  goToPublicBookInst(book: BookInstance) {
+    this.communicatorService.push<BookInstance>(book);
+    this.router.navigate(['/public-book-inst']);
   }
 
 }

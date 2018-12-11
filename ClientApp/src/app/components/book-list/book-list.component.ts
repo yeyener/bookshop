@@ -1,4 +1,4 @@
-import { JsonTsConverterService } from './../../json-ts-converter.service';
+import { JsonTsConverterService } from '../../json-ts-converter.service';
 import { BookErrorHandler } from './../../handlers/bookErrorHandler';
 import { CommunicatorService } from './../../services/communicator.service';
 import { BookInstance } from './../../pocos/bookInstance';
