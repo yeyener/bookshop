@@ -1,3 +1,4 @@
+import { JsonTsConverterService } from './../../json-ts-converter.service';
 import { BookdefService } from './../../services/bookdef.service';
 import { AutoCompleteTextComponent } from './../auto-complete-text/auto-complete-text.component';
 import { AuthService } from './../../services/auth.service';
@@ -31,7 +32,8 @@ export class FrontPageComponent implements OnInit {
   private selectedBookOrWriter: any;
 
   constructor(private bookInstService: BookInstService, private errHandler: BookErrorHandler, private fpService: FrontPageService,
-     private router: Router, private authService: AuthService, private bookDefService: BookdefService) {
+     private router: Router, private authService: AuthService, private bookDefService: BookdefService,
+     private jsonTsConverter: JsonTsConverterService) {
   }
 
   ngOnInit() {
@@ -50,27 +52,8 @@ export class FrontPageComponent implements OnInit {
 
   getBooks() {
     this.bookInstService.get().subscribe(
-      a => { this.instances = <BookInstance[]>a; this.convert(a); this.booksLoaded = Promise.resolve(true); },
+      a => { this.instances = <BookInstance[]>a; /* convert kullanılacak TODO */  this.booksLoaded = Promise.resolve(true); },
       err => this.errHandler.handleError(err));
-  }
-
-  // const jsonArray = <BookInstance[]>a ; jsonArray.forEach(element => {
-  //   this.instances.push(this.convert(element));
-
-  convert(jsonObject) {
-    const jsonConvert: JsonConvert = new JsonConvert();
-    jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
-    jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
-    jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL; // never allow null
-
-    // Map to the country class
-    let bi: BookInstance;
-    try {
-        bi = jsonConvert.deserialize(jsonObject, BookInstance);
-    } catch (e) {
-        console.log((<Error>e));
-    }
-    return bi;
   }
 
   addBookToCart(bookId) {
